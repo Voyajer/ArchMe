@@ -12,13 +12,14 @@ timedatectl set-ntp true
 
 lsblk
 
-echo Formatting /dev/sda as ext4 in 5 seconds...
-sleep 5s
+echo enter which drive to format as ext4:
+read drivePath
+sleep 1s
 
-mkfs.ext4 /dev/sda
+mkfs.ext4 $drivePath
 
-echo Mounting /dev/sda
-mount /dev/sda /mnt
+echo Mounting $drivePath
+mount $drivePath /mnt
 
 echo Installing base and base-devel
 pacstrap /mnt base base-devel
@@ -27,61 +28,5 @@ echo Generating fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo Chrooting into installation
+echo Run aconfig inside the chroot environment to finish installation
 arch-chroot /mnt
-
-############## INSIDE ARCH INSTALL ##############
-
-hwclock --systohc
-
-echo Setting locale
-echo "en_US.UTF-8" >> /etc/locale.gen
-locale-gen
-
-echo Setting hostname as Jon
-echo "Jon" >> /etc/hostname
-
-echo Install iw and wpa_supplicant if device needs wifi
-pacman -S iw wpa_supplicant
-
-echo Create password for root:
-passwd
-
-echo Creating user jon:
-groupadd sudo
-useradd -m -G wheel,sudo -s /bin/bash jon
-
-echo Create password for jon:
-passwd jon
-#Allow all users to use sudo
-echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
-
-#pacaur
-echo Installing pacaur
-echo Login as jon:
-gpg --recv-keys --keyserver hkp://pgp.mit.edu
-echo "EDITOR="/usr/bin/nano"" >> /etc/environment
-su jon
-cd /home/jon
-curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
-tar -xvzf cower.tar.gz
-curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
-tar -xvzf pacaur.tar.gz
-cd ~/cower
-makepkg -csri
-cd ~/pacaur
-makepkg -csri
-
-su root
-
-#intel ucode
-echo Install if using Intel processor:
-pacman -S intel-ucode
-#####################################################grub-mkconfig -o /boot/grub/grub.cfg
-
-
-echo Installing plasma-meta package
-pacman -S plasma-meta
-
-
-
-echo Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)
