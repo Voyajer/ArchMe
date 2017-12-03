@@ -2,7 +2,7 @@
 
 #ARCHLINUX INSTALL SCRIPTS MODE
 
-ping archlinux.org
+ping archlinux.org -c 4
 
 pacman -Sy
 
@@ -12,16 +12,18 @@ timedatectl set-ntp true
 
 lsblk
 
-echo enter which drive to format as ext4:
+echo enter which drive to format as ext4 (ex: sda ,sdb, or sdc):
 read drivePath
 sleep 1s
 
-mkfs.ext4 $drivePath
+mkfs.ext4 /dev/$drivePath
 
 echo Mounting $drivePath
 mount $drivePath /mnt
 
 echo Installing base and base-devel
+sleep 1s
+
 pacstrap /mnt base base-devel
 
 echo Generating fstab
@@ -32,5 +34,6 @@ echo Run aconfig inside the chroot environment to finish installation
 
 mv ainstall /mnt
 mv aconfig /mnt
+sleep 1s
 
 arch-chroot /mnt
