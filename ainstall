@@ -12,7 +12,7 @@ timedatectl set-ntp true
 
 lsblk
 
-echo enter which drive to format as ext4 (ex: sda ,sdb, or sdc):
+echo "enter which drive to format as ext4 (ex: sda ,sdb, or sdc):"
 read drivePath
 sleep 1s
 
