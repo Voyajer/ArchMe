@@ -33,18 +33,20 @@ echo Installing pacaur
 echo Login as $userName:
 gpg --recv-keys --keyserver hkp://pgp.mit.edu
 echo "EDITOR="/usr/bin/nano"" >> /etc/environment
-su $userName
+
+#su $userName   //stay as root and use sudo
+
 cd /home/$userName
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
 tar -xvzf cower.tar.gz
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
 tar -xvzf pacaur.tar.gz
 cd ~/cower
-makepkg -csri
+sudo -u $userName makepkg -csri
 cd ~/pacaur
-makepkg -csri
+sudo -u $userName makepkg -csri
 
-su root
+#su root
 
 #intel ucode
 echo Install if using Intel processor:
