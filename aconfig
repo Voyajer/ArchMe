@@ -36,14 +36,15 @@ echo "EDITOR="/usr/bin/nano"" >> /etc/environment
 
 #su $userName   //stay as root and use sudo
 
-chown -hR $userName /home/$userName
-
 cd /home/$userName
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
 tar -xvzf cower.tar.gz
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
 tar -xvzf pacaur.tar.gz
 cd /home/$userName/cower
+
+chown -hR $userName /home/$userName
+
 sudo -u $userName makepkg -csri --skippgpcheck
 cd /home/$userName/pacaur
 sudo -u $userName makepkg -csri --skippgpcheck
