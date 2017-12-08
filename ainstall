@@ -12,8 +12,12 @@ timedatectl set-ntp true
 
 lsblk
 
-echo "enter which drive to format as ext4 (ex: sda ,sdb, or sdc):"
+echo "Enter which drive to format as ext4 (ex: sda ,sdb, or sdc):"
 read drivePath
+
+echo "Make your drive bootable by enabling the bootable flag (a):"
+fdisk /dev/$drivePath
+
 sleep 1s
 
 mkfs.ext4 /dev/$drivePath
