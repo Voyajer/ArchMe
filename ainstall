@@ -22,7 +22,7 @@ sleep 1s
 
 mkfs.ext4 /dev/$drivePath\1
 
-echo Mounting $drivePath
+echo Mounting $drivePath\1
 mount /dev/$drivePath\1 /mnt
 
 echo Installing base and base-devel
