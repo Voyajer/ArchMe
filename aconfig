@@ -41,9 +41,9 @@ curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
 tar -xvzf cower.tar.gz
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
 tar -xvzf pacaur.tar.gz
-cd ~/cower
+cd /home/$userName/cower
 sudo -u $userName makepkg -csri
-cd ~/pacaur
+cd /home/$userName/pacaur
 sudo -u $userName makepkg -csri
 
 #su root
@@ -54,8 +54,8 @@ pacman -S intel-ucode
 #####################################################grub-mkconfig -o /boot/grub/grub.cfg
 
 echo Installing plasma-meta package
-echo Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)
+echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
 read -p -n1-s
 pacman -S plasma-meta
 
-echo Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)
+echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
