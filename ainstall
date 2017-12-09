@@ -28,10 +28,10 @@ mount /dev/$drivePath\1 /mnt
 echo Installing base and base-devel
 sleep 1s
 
-pacstrap /mnt base base-devel
+pacstrap -i /mnt base base-devel
 
 echo Generating fstab
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U -p /mnt >> /mnt/etc/fstab
 
 echo Chrooting into installation
 echo Run aconfig inside the chroot environment to finish installation
