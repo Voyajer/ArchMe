@@ -2,18 +2,25 @@
 
 ############## INSIDE ARCH INSTALL ##############
 
-hwclock --systohc
-
-echo Setting locale
-echo "en_US.UTF-8" >> /etc/locale.gen
+echo Select locale:
+sleep 3s
+nano /etc/locale.gen
 locale-gen
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+export LANG=en_US.UTF-8
+ls -s /usr/share/zoneinfo/America/New_York > /etc/localtime
+hwclock --systohc --utc
+
+echo Configure repositories (multilib support):
+sleep 3s
+nano /etc/pacman.conf
 
 echo What should the hostname be?
 read hostName
 echo "$hostName" >> /etc/hostname
 
 echo Install iw and wpa_supplicant if device needs wifi.
-pacman -S iw wpa_supplicant
+pacman -Sy iw wpa_supplicant
 
 echo Create password for root:
 passwd
@@ -21,20 +28,23 @@ passwd
 echo What should the user name be?:
 read userName
 groupadd sudo
-useradd -m -G wheel,sudo -s /bin/bash $userName
+useradd -m -g users -G wheel,storage,power,sudo -s /bin/bash $userName
 
 echo Create password for $userName:
 passwd $userName
 #Allow all users to use sudo
 echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
 
+#bootloader-gen
+mkinitcpio -p linux
+pacman -Sy grub os-prober
+grub-install --target=i386-pc --recheck /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+
 #pacaur
-echo Installing pacaur
-echo Login as $userName:
+echo Installing pacaur:
 gpg --recv-keys --keyserver hkp://pgp.mit.edu
 echo "EDITOR="/usr/bin/nano"" >> /etc/environment
-
-#su $userName   //stay as root and use sudo
 
 cd /home/$userName
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
@@ -49,17 +59,15 @@ sudo -u $userName makepkg -csri --skippgpcheck
 cd /home/$userName/pacaur
 sudo -u $userName makepkg -csri --skippgpcheck
 
-#su root
-
 #intel ucode
-echo Install if using Intel processor:
-pacman -S intel-ucode
+echo "Install if using Intel processor:"
+pacman -Sy intel-ucode
 #####################################################grub-mkconfig -o /boot/grub/grub.cfg
 
 echo Installing plasma-meta package
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
 echo press enter to continue:
 read -p
-pacman -S plasma-meta
+pacman -S plasma-meta bash-completion
 
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
