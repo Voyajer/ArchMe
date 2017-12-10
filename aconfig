@@ -28,8 +28,7 @@ passwd
 
 echo "What should the user name be?:"
 read userName
-groupadd sudo
-useradd -m -g users -G wheel,storage,power,sudo -s /bin/bash $userName
+useradd -m -g users -G wheel,storage,power -s /bin/bash $userName
 
 echo "Create password for $userName:"
 passwd $userName
@@ -77,7 +76,7 @@ echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), o
 echo "Press enter to continue:"
 read -p
 pacman -S plasma-meta bash-completion xf86-video-vesa
-systemctl enable sddm
+systemctl enable sddm.service
 clear
 
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
