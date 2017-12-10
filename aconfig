@@ -75,7 +75,7 @@ echo "Installing xorg, xorg-apps, xorg-xinit, and plasma-meta package"
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
 echo "Press enter to continue:"
 read -p
-pacman -S plasma-meta bash-completion xf86-video-vesa
+pacman -S plasma-meta bash-completion xorg-xinit xf86-video-vesa xorg-apps xorg
 systemctl enable sddm.service
 clear
 
