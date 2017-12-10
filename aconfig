@@ -65,7 +65,7 @@ pacman -Sy intel-ucode
 
 clear
 #networking
-ap addr
+ip addr
 echo "Enter the name of your network device"
 read $netDevice
 systemctl enable dhcpcd@$netDevice
