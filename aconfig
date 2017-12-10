@@ -75,7 +75,7 @@ echo "Installing KDE plasma and programs:"
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
 echo "Press enter to continue:"
 read -p
-pacman -S plasma-meta bash-completion xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio libreoffice-fresh spectacle konsole gwenview dolphin ark p7zip htop wine-staging partitionmanager kate mpv
+pacman -S plasma-meta bash-completion xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio libreoffice-fresh spectacle konsole gwenview dolphin ark p7zip htop wine-staging partitionmanager kate qbittorrent baka-mplayer
 systemctl enable sddm.service
 clear
 
