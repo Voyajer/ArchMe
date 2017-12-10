@@ -36,8 +36,8 @@ passwd $userName
 echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
 
 #bootloader-gen
-mkinitcpio -p linux
 pacman -Sy grub os-prober
+mkinitcpio -p linux
 grub-install --target=i386-pc --recheck /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 
