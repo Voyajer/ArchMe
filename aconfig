@@ -20,9 +20,6 @@ echo What should the hostname be?
 read hostName
 echo "$hostName" >> /etc/hostname
 
-echo "Install iw and wpa_supplicant if device needs wifi."
-pacman -Sy iw wpa_supplicant
-
 echo "Create password for root:"
 passwd
 
@@ -75,8 +72,12 @@ echo "Installing KDE plasma and programs:"
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
 echo "Press enter to continue:"
 read -p
-pacman -S plasma-meta plasma-nm bash-completion xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio libreoffice-fresh spectacle konsole gwenview dolphin ark p7zip htop wine-staging partitionmanager kate qbittorrent baka-mplayer
+pacman -S plasma-meta plasma-nm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio libreoffice-fresh spectacle konsole gwenview dolphin ark p7zip htop wine-staging partitionmanager kate qbittorrent baka-mplayer
 systemctl enable sddm.service
+systemctl enable NetworkManager.service
+systemctl enable wpa_supplicant.service
+systemctl start NetworkManager.service
+systemctl start wpa_supplicant.service
 clear
 
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
