@@ -2,8 +2,8 @@
 
 ############## INSIDE ARCH INSTALL ##############
 
-echo Select locale:
-sleep 3s
+echo "Select locale:"
+echo "Press enter to continue:"
 nano /etc/locale.gen
 locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
@@ -12,7 +12,8 @@ ls -s /usr/share/zoneinfo/America/New_York > /etc/localtime
 hwclock --systohc --utc
 
 echo "Configure repositories (multilib support):"
-sleep 3s
+echo "Press enter to continue:"
+read -p
 nano /etc/pacman.conf
 
 echo What should the hostname be?
@@ -62,11 +63,18 @@ sudo -u $userName makepkg -csri --skippgpcheck
 #intel ucode
 echo "Install if using Intel processor:"
 pacman -Sy intel-ucode
-#####################################################grub-mkconfig -o /boot/grub/grub.cfg
 
-echo "Installing plasma-meta package"
+clear
+#networking
+ap addr
+echo "Enter the name of your network device"
+read $netDevice
+systemctl enable dhcpcd@$netDevice
+systemctl start dhcpcd@$netDevice
+
+echo "Installing xorg, xorg-apps, xorg-xinit, and plasma-meta package"
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
-echo press enter to continue:
+echo "Press enter to continue:"
 read -p
 pacman -S plasma-meta bash-completion
 
