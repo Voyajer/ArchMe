@@ -61,11 +61,6 @@ echo "Install if using Intel processor:"
 pacman -Sy intel-ucode
 
 clear
-#networking
-ip addr
-echo "Enter the name of your network device"
-read $netDevice
-systemctl enable dhcpcd@$netDevice
 
 echo "Installing KDE plasma and programs:"
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
@@ -75,11 +70,10 @@ pacman -S plasma-meta plasma-nm bash-completion wpa_supplicant xorg-xinit xf86-v
 systemctl enable sddm.service
 systemctl enable NetworkManager.service
 systemctl enable wpa_supplicant.service
-systemctl start NetworkManager.service
-systemctl start wpa_supplicant.service
 
 rm -rf /ainstall /aconfig /home/$userName/cower* /home/$userName/pacaur*
 
 clear
 
 echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
+echo "You'll also probably want nvidia-settings and lib32-nvidia-utils"
