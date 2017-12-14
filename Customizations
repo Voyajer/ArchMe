@@ -1,0 +1,24 @@
+#Post installation customizations
+
+#font
+ABeeZee - https://www.fontsquirrel.com/fonts/abeezee
+
+#cursor
+adwaita-icon-theme (included)
+
+#icon theme
+papirus-icon-theme
+
+#window decorations
+adapta
+
+#shortcuts
+konsole - ctrl+alt+t
+
+#sddm theme
+Breeze
+
+#autostart
+conky, fancurve, overclocks
+
+#
