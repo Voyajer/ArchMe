@@ -71,12 +71,27 @@ pacman -Sy intel-ucode
 
 clear
 
-echo "Installing KDE plasma and programs:"
-echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
+echo "Which desktop environment do you want? (plasma, gnome3, or xfce only)"
+read deWM
+case $deWM in
+      plasma)
+           pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark qbittorrent
+           systemctl enable sddm.service
+           ;;
+      gnome3)
+           pacman -S --noconfirm gnome gparted gedit file-roller deluge
+           systemctl enable gdm.service
+           ;;
+      xfce)
+           pacman -S --noconfirm xfce4 xfce4-goodies gparted deluge sddm
+           systemctl enable sddm.service
+      
+
+echo "Install Nvidia GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
 echo "Press enter to continue:"
 read -p
-pacman -S plasma-meta plasma-nm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio libreoffice-fresh spectacle konsole gwenview dolphin ark p7zip htop wine-staging winetricks partitionmanager kate qbittorrent mpv adwaita-icon-theme links
-systemctl enable sddm.service
+pacman -S --noconfirm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links
+
 systemctl enable NetworkManager.service
 systemctl enable wpa_supplicant.service
 
