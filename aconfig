@@ -44,16 +44,12 @@ gpg --recv-keys --keyserver hkp://pgp.mit.edu
 echo "EDITOR="/usr/bin/nano"" >> /etc/environment
 
 cd /home/$userName
-curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
-tar -xvzf cower.tar.gz
-curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
-tar -xvzf pacaur.tar.gz
-cd /home/$userName/cower
+curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/trizen.tar.gz
+tar -xvzf trizen.tar.gz
+cd /home/$userName/trizen
 
 chown -hR $userName /home/$userName
 
-sudo -u $userName makepkg -csri --skippgpcheck
-cd /home/$userName/pacaur
 sudo -u $userName makepkg -csri --skippgpcheck
 
 #intel ucode
