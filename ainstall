@@ -1,43 +1,42 @@
 #!/bin/bash
 
-#ARCHLINUX INSTALL SCRIPTS MODE
-
+#check network
 ping archlinux.org -c 4
 
+#prelim setup
 pacman -Sy
-
 loadkeys "us"
-
 timedatectl set-ntp true
 
-lsblk
+clear
 
-echo "Enter which drive to format as ext4 (ex: sda ,sdb, or sdc):"
+#partitioning
+lsblk
+echo "Enter drive to partition (ex: sda, sdb, or sdc):"
 read drivePath
-echo "After partitioning $drivePath, $drivePath\1 will be formatted as ext4."
+echo "Now partitioning $drivePath\:"
 echo "Press enter to run cfdisk:"
 cfdisk /dev/$drivePath
+echo "Which partition on drive $drivePath are you installing arch onto? (ex: sda1, sda3, or sdb2)"
+read fullPath
+echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or xfs)"
+read fSystem
+mkfs.$fSystem /dev/$fullPath
 
-sleep 1s
-
-mkfs.ext4 /dev/$drivePath\1
-
-echo Mounting $drivePath\1
+echo "Mounting $fullPath"
 mount /dev/$drivePath\1 /mnt
 
-echo Installing base and base-devel
-sleep 1s
-
+echo "Installing base and base-devel"
 pacstrap -i /mnt base base-devel
 
-echo Generating fstab
+echo "Generating fstab:"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
-echo Chrooting into installation
-echo Run aconfig inside the chroot environment to finish installation
+echo "Chrooting into installation:"
+echo "Run aconfig inside the chroot environment to finish installation."
 
 mv ainstall /mnt
 mv aconfig /mnt
-sleep 1s
 
+sleep 1s
 arch-chroot /mnt
