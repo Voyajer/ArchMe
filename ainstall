@@ -17,6 +17,9 @@ read drivePath
 echo "Now partitioning $drivePath\:"
 echo "Press enter to run cfdisk:"
 cfdisk /dev/$drivePath
+
+clear
+
 echo "Which partition on drive $drivePath are you installing arch onto? (ex: sda1, sda3, or sdb2)"
 read fullPath
 echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or xfs)"
@@ -27,13 +30,15 @@ echo "Mounting $fullPath"
 mount /dev/$drivePath\1 /mnt
 
 echo "Installing base and base-devel"
-pacstrap -i /mnt base base-devel
+pacstrap /mnt base base-devel
 
 echo "Generating fstab:"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 echo "Chrooting into installation:"
 echo "Run aconfig inside the chroot environment to finish installation."
+
+clear
 
 mv ainstall /mnt
 mv aconfig /mnt
