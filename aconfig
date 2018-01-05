@@ -1,31 +1,41 @@
 #!/bin/bash
 
-############## INSIDE ARCH INSTALL ##############
-
+#locale setup
 echo "Select locale:"
 echo "Press enter to continue:"
 nano /etc/locale.gen
 locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 export LANG=en_US.UTF-8
+
 ls -s /usr/share/zoneinfo/America/New_York > /etc/localtime
 hwclock --systohc --utc
+
+clear
 
 echo "Configure repositories (multilib support):"
 echo "Press enter to continue:"
 read -p
 nano /etc/pacman.conf
 
+clear
+
 echo What should the hostname be?
 read hostName
 echo "$hostName" >> /etc/hostname
 
+clear
+
 echo "Create password for root:"
 passwd
+
+clear
 
 echo "What should the user name be?:"
 read userName
 useradd -m -g users -G wheel,storage,power -s /bin/bash $userName
+
+clear
 
 echo "Create password for $userName:"
 passwd $userName
@@ -37,6 +47,8 @@ pacman -Syu --noconfirm grub os-prober
 mkinitcpio -p linux
 grub-install --target=i386-pc --recheck /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
+
+clear
 
 #aur helper
 echo "Installing trizen:"
@@ -50,6 +62,8 @@ cd /home/$userName/trizen
 chown -hR $userName /home/$userName
 
 sudo -u $userName makepkg -csri --skippgpcheck
+
+clear
 
 #intel ucode
 echo "Install if using Intel processor:"
