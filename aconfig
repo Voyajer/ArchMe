@@ -33,14 +33,13 @@ passwd $userName
 echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
 
 #bootloader-gen
-pacman -Sy grub os-prober
+pacman -Syu --noconfirm grub os-prober
 mkinitcpio -p linux
 grub-install --target=i386-pc --recheck /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 
-#pacaur
-echo "Installing pacaur:"
-gpg --recv-keys --keyserver hkp://pgp.mit.edu
+#aur helper
+echo "Installing trizen:"
 echo "EDITOR="/usr/bin/nano"" >> /etc/environment
 
 cd /home/$userName
@@ -67,7 +66,7 @@ systemctl enable sddm.service
 systemctl enable NetworkManager.service
 systemctl enable wpa_supplicant.service
 
-rm -rf /ainstall /aconfig /home/$userName/cower* /home/$userName/pacaur*
+rm -rf /ainstall /aconfig /home/$userName/trizen*
 
 clear
 
