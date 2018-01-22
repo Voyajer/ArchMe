@@ -85,7 +85,7 @@ case $deWM in
       xfce)
            pacman -S --noconfirm xfce4 xfce4-goodies gparted deluge sddm
            systemctl enable sddm.service
-      
+easc
 
 echo "Install Nvidia GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
 echo "Press enter to continue:"
