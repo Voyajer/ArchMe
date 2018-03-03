@@ -91,7 +91,7 @@ easc
 echo "Install Nvidia GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
 echo "Press enter to continue:"
 read -p
-pacman -S --noconfirm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links
+pacman -S --noconfirm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links
 
 systemctl enable NetworkManager.service
 systemctl enable wpa_supplicant.service
