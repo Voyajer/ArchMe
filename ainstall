@@ -35,10 +35,10 @@ pacstrap /mnt base base-devel
 echo "Generating fstab:"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
+clear
+
 echo "Chrooting into installation:"
 echo "Run aconfig inside the chroot environment to finish installation."
-
-clear
 
 mv ainstall /mnt
 mv aconfig /mnt
