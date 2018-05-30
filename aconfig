@@ -8,6 +8,7 @@ locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 export LANG=en_US.UTF-8
 
+echo "Setting timezone to US East.
 ls -s /usr/share/zoneinfo/America/New_York > /etc/localtime
 hwclock --systohc --utc
 
