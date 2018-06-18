@@ -14,7 +14,7 @@ hwclock --systohc --utc
 
 clear
 
-echo "Configure repositories (multilib support):"
+echo "Configure repositories \(multilib support\):"
 echo "Press enter to continue:"
 read -p
 nano /etc/pacman.conf
@@ -73,7 +73,7 @@ pacman -Sy intel-ucode
 
 clear
 
-echo "Which desktop environment do you want? (plasma, gnome3, or xfce only)"
+echo "Which desktop environment do you want? \(plasma, gnome3, or xfce only\)"
 read deWM
 case $deWM in
       plasma)
@@ -89,7 +89,7 @@ case $deWM in
            systemctl enable sddm.service
 easc
 
-echo "Install Nvidia GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
+echo "Install Nvidia GPU drivers with package nvidia \(400+\), nvidia-340xx \(8000-300\), or nvidia-304xx \(6000-7000\)"
 echo "Press enter to continue:"
 read -p
 pacman -S --noconfirm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links
@@ -101,5 +101,5 @@ rm -rf /ainstall /aconfig /home/$userName/trizen*
 
 clear
 
-echo "Install GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
+echo "Install GPU drivers with package nvidia \(400+\), nvidia-340xx \(8000-300\), or nvidia-304xx \(6000-7000\)"
 echo "You'll also probably want nvidia-settings and lib32-nvidia-utils"
