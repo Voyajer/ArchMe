@@ -102,4 +102,4 @@ rm -rf /ainstall /aconfig /home/$userName/trizen*
 clear
 
 echo "Install GPU drivers with package nvidia \(400+\), nvidia-340xx \(8000-300\), or nvidia-304xx \(6000-7000\)"
-echo "You'll also probably want nvidia-settings and lib32-nvidia-utils"
+echo "You\'ll also probably want nvidia-settings and lib32-nvidia-utils"
