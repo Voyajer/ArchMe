@@ -4,7 +4,6 @@
 ping archlinux.org -c 4
 
 #prelim setup
-pacman -Sy
 loadkeys "us"
 timedatectl set-ntp true
 
