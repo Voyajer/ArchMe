@@ -1,8 +1,11 @@
 #!/bin/bash
 
+pacman -Syyu --noconfirm grub os-prober
+
 #locale setup
 echo "Select locale:"
 echo "Press enter to continue:"
+read -p
 
 #nano /etc/locale.gen
 echo en_US.UTF-8 UTF-8 > /etc/locale.gen
@@ -16,9 +19,7 @@ echo "Setting timezone to US East.
 ls -s /usr/share/zoneinfo/America/New_York > /etc/localtime
 hwclock --systohc --utc
 
-clear
-
-echo "Configure repositories \(multilib support\):"
+echo "Configure repositories (multilib support):"
 echo "Press enter to continue:"
 read -p
 nano /etc/pacman.conf
@@ -44,21 +45,24 @@ clear
 
 echo "Create password for $userName:"
 passwd $userName
-#Allow all users to use sudo
+#Allow all users to use sudo if they know the password
 echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
 
 #bootloader-gen
-pacman -Syu --noconfirm grub os-prober
 os-prober
 mkinitcpio -p linux
 grub-install --target=i386-pc --recheck /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
+echo -e "\n\nGRUB_DEFAULT=saved" >> /etc/default/grub
+echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub
+echo "GRUB_FORCE_HIDDEN_MENU="TRUE""
+update-grub
 
 clear
 
 #aur helper
 echo "Installing trizen:"
-echo "EDITOR="/usr/bin/nano"" >> /etc/environment
+echo "EDITOR="/usr/bin/nano" >> /etc/environment
 
 cd /home/$userName
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/trizen.tar.gz
@@ -77,25 +81,26 @@ pacman -Sy intel-ucode
 
 clear
 
-echo "Which desktop environment do you want? \(plasma, gnome3, or xfce only\)"
+echo "Which desktop environment do you want? (plasma, gnome3, or xfce only)"
 read deWM
 case $deWM in
       plasma)
            pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark qbittorrent
            systemctl enable sddm.service
+           break
            ;;
       gnome3)
            pacman -S --noconfirm gnome gparted gedit file-roller deluge
            systemctl enable gdm.service
+           break
            ;;
       xfce)
            pacman -S --noconfirm xfce4 xfce4-goodies gparted deluge sddm
            systemctl enable sddm.service
+           break
+           ;;
 easc
 
-echo "Install Nvidia GPU drivers with package nvidia \(400+\), nvidia-340xx \(8000-300\), or nvidia-304xx \(6000-7000\)"
-echo "Press enter to continue:"
-read -p
 pacman -S --noconfirm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links
 
 systemctl enable NetworkManager.service
@@ -105,5 +110,5 @@ rm -rf /ainstall /aconfig /home/$userName/trizen*
 
 clear
 
-echo "Install GPU drivers with package nvidia \(400+\), nvidia-340xx \(8000-300\), or nvidia-304xx \(6000-7000\)"
-echo "You\'ll also probably want nvidia-settings and lib32-nvidia-utils"
+echo "Install Nvidia GPU drivers with package nvidia \(400+\), nvidia-340xx \(8000-300\), or nvidia-304xx \(6000-7000\)"
+echo "You\'ll also probably want nvidia-settings and lib32-nvidia-utils for configuration and games."
