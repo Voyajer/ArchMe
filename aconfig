@@ -3,10 +3,14 @@
 #locale setup
 echo "Select locale:"
 echo "Press enter to continue:"
-nano /etc/locale.gen
+
+#nano /etc/locale.gen
+echo en_US.UTF-8 UTF-8 > /etc/locale.gen
+
 locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 export LANG=en_US.UTF-8
+locale -a
 
 echo "Setting timezone to US East.
 ls -s /usr/share/zoneinfo/America/New_York > /etc/localtime
