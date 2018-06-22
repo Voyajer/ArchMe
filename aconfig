@@ -7,9 +7,9 @@ echo "Press enter to continue:"
 #nano /etc/locale.gen
 echo en_US.UTF-8 UTF-8 > /etc/locale.gen
 
-locale-gen
-echo LANG=en_US.UTF-8 > /etc/locale.conf
+localectl set-locale LANG=en_US.UTF-8
 export LANG=en_US.UTF-8
+locale-gen
 locale -a
 
 echo "Setting timezone to US East.
