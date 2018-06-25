@@ -28,6 +28,8 @@ mkfs.$fSystem /dev/$fullPath
 echo "Mounting $fullPath"
 mount /dev/$drivePath\1 /mnt
 
+clear
+
 echo "Installing base and base-devel"
 pacstrap /mnt base base-devel
 
