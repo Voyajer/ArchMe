@@ -1,50 +1,28 @@
 #!/bin/bash
 
-#
-echo "Press enter to continue:"
-read -p
-
 pacman -Syyu --noconfirm grub os-prober
 
 #locale setup
 echo "Select locale:"
-echo "Press enter to continue:"
-read -p
+read -p "Press enter to continue:"
 
 #nano /etc/locale.gen
 echo en_US.UTF-8 UTF-8 > /etc/locale.gen
-
-#
-echo "Press enter to continue:"
-read -p
 
 localectl set-locale LANG=en_US.UTF-8
 export LANG=en_US.UTF-8
 locale-gen
 locale -a
 
-#
-echo "Press enter to continue:"
-read -p
-
-echo "Setting timezone to US East.
+echo "Setting timezone to US East."
 ls -s /usr/share/zoneinfo/America/New_York > /etc/localtime
 hwclock --systohc --utc
 
-#
-echo "Press enter to continue:"
-read -p
-
 echo "Configure repositories (multilib support):"
-echo "Press enter to continue:"
-read -p
+read -p "Press enter to continue:"
 nano /etc/pacman.conf
 
 clear
-
-#
-echo "Press enter to continue:"
-read -p
 
 echo What should the hostname be?
 read hostName
@@ -52,18 +30,10 @@ echo "$hostName" >> /etc/hostname
 
 clear
 
-#
-echo "Press enter to continue:"
-read -p
-
 echo "Create password for root:"
 passwd
 
 clear
-
-#
-echo "Press enter to continue:"
-read -p
 
 echo "What should the user name be?:"
 read userName
@@ -71,18 +41,10 @@ useradd -m -g users -G wheel,storage,power -s /bin/bash $userName
 
 clear
 
-#
-echo "Press enter to continue:"
-read -p
-
 echo "Create password for $userName:"
 passwd $userName
 #Allow all users to use sudo if they know the password
 echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
-
-#
-echo "Press enter to continue:"
-read -p
 
 #bootloader-gen
 os-prober
@@ -94,51 +56,30 @@ echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub
 echo "GRUB_FORCE_HIDDEN_MENU="TRUE""
 update-grub
 
-
-#
-echo "Press enter to continue:"
-read -p
-
 clear
 
 #aur helper
 echo "Installing trizen:"
 echo "EDITOR="/usr/bin/nano" >> /etc/environment
 
-#
-echo "Press enter to continue:"
-read -p
-
 cd /home/$userName
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/trizen.tar.gz
 tar -xvzf trizen.tar.gz
 cd /home/$userName/trizen
 
-#
-echo "Press enter to continue:"
-read -p
-
 chown -hR $userName /home/$userName
 
 sudo -u $userName makepkg -csri --skippgpcheck
-
-#
-echo "Press enter to continue:"
-read -p
 
 clear
 
 #intel ucode
 echo "Install if using Intel processor:"
-pacman -Sy intel-ucode
+pacman -S intel-ucode
 
 clear
 
-#
-echo "Press enter to continue:"
-read -p
-
-echo "Which desktop environment do you want? (plasma, gnome3, or xfce only)"
+echo "Which desktop environment would you like to use? (plasma, gnome3, or xfce only)"
 read deWM
 case $deWM in
       plasma)
@@ -157,10 +98,6 @@ case $deWM in
            break
            ;;
 easc
-
-#
-echo "Press enter to continue:"
-read -p
 
 pacman -S --noconfirm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links
 
