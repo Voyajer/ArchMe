@@ -85,20 +85,14 @@ read deWM
 case $deWM in
       plasma)
            pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark qbittorrent
-           systemctl enable sddm.service
-           break
-           ;;
+           systemctl enable sddm.service ;;
       gnome3)
            pacman -S --noconfirm gnome gparted gedit file-roller deluge
-           systemctl enable gdm.service
-           break
-           ;;
+           systemctl enable gdm.service ;;
       xfce)
            pacman -S --noconfirm xfce4 xfce4-goodies gparted deluge sddm
-           systemctl enable sddm.service
-           break
-           ;;
-easc
+           systemctl enable sddm.service ;;
+           esac
 
 pacman -S --noconfirm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links
 
