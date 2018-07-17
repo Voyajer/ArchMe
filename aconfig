@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacman -Syyu --noconfirm grub os-prober
+pacman -S --noconfirm grub os-prober
 
 #locale setup
 echo "Select locale:"
@@ -21,6 +21,7 @@ hwclock --systohc --utc
 echo "Configure repositories (multilib support):"
 read -p "Press enter to continue:"
 nano /etc/pacman.conf
+pacman -Sy
 
 clear
 
@@ -50,17 +51,17 @@ echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
 os-prober
 mkinitcpio -p linux
 grub-install --target=i386-pc --recheck /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
 echo -e "\n\nGRUB_DEFAULT=saved" >> /etc/default/grub
 echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub
 echo "GRUB_FORCE_HIDDEN_MENU="TRUE""
-update-grub
+
+grub-mkconfig -o /boot/grub/grub.cfg
 
 clear
 
 #aur helper
 echo "Installing trizen:"
-echo "EDITOR="/usr/bin/nano" >> /etc/environment
+echo EDITOR="/usr/bin/nano" >> /etc/environment
 
 cd /home/$userName
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/trizen.tar.gz
