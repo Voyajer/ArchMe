@@ -80,7 +80,7 @@ pacman -S intel-ucode
 
 clear
 
-echo "Which desktop environment would you like to use? (plasma, gnome3, or xfce only)"
+echo "Which desktop environment would you like to use? (plasma, gnome3, xfce, or none)"
 read deWM
 case $deWM in
       plasma)
@@ -92,6 +92,8 @@ case $deWM in
       xfce)
            pacman -S --noconfirm xfce4 xfce4-goodies gparted deluge sddm
            systemctl enable sddm.service ;;
+      none)
+           ;;
            esac
 
 pacman -S --noconfirm bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox pulseaudio pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links
