@@ -49,6 +49,7 @@ echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
 
 #bootloader-gen
 os-prober
+awk '{gsub(/HOOKS=(base udev autodetect block modconf filesystems keyboard fsck)/,"HOOKS=(base udev block autodetect modconf filesystems keyboard fsck");}' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 grub-install --target=i386-pc --recheck /dev/sda
 echo -e "\n\nGRUB_DEFAULT=saved" >> /etc/default/grub
