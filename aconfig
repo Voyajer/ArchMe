@@ -92,7 +92,7 @@ case $deWM in
            pacman -S --noconfirm gnome gparted gedit file-roller deluge
            systemctl enable gdm.service ;;
       xfce)
-           pacman -S --noconfirm xfce4 xfce4-goodies gparted deluge sddm
+           pacman -S --noconfirm xfce4 xfce4-goodies gparted deluge sddm network-manager-applet
            systemctl enable sddm.service ;;
       none)
            ;;
@@ -109,3 +109,4 @@ clear
 
 echo "Install Nvidia GPU drivers with package nvidia \(400+\), nvidia-340xx \(8000-300\), or nvidia-304xx \(6000-7000\)"
 echo "You\'ll also probably want nvidia-settings and lib32-nvidia-utils for configuration and games."
+echo "You may need to modprobe your wifi driver to get it running at first."
