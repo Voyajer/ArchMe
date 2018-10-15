@@ -92,7 +92,7 @@ case $deWM in
            pacman -S --noconfirm gnome gparted gedit file-roller deluge
            systemctl enable gdm.service ;;
       xfce)
-           pacman -S --noconfirm xfce4 xfce4-goodies gparted deluge sddm network-manager-applet
+           pacman -S --noconfirm xfce4 xfce4-goodies gparted file-roller deluge sddm network-manager-applet
            systemctl enable sddm.service ;;
       none)
            ;;
