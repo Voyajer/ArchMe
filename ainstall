@@ -19,14 +19,26 @@ cfdisk /dev/$drivePath
 
 clear
 
-echo "Which partition on drive $drivePath are you installing arch onto? (ex: sda1, sda3, or sdb2)"
+echo "Which partition are you installing arch onto? (ex: sda1, sda3, or sdb2)"
 read fullPath
 echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or xfs)"
 read fSystem
 mkfs.$fSystem /dev/$fullPath
 
 echo "Mounting $fullPath"
-mount /dev/$drivePath\1 /mnt
+mount /dev/$fullPath /mnt
+
+lsblk
+cd /
+ls
+
+while [$dir != no]
+  do echo "Are there any additional directories to mount to its own partition? (If so type the directory name, if not write no.)"
+     read dir
+     echo "What partition should $dir be mounted to?"
+     read partition
+     mount /$dir /dev/$partition
+done
 
 clear
 
@@ -41,8 +53,8 @@ clear
 echo "Chrooting into installation:"
 echo "Run aconfig inside the chroot environment to finish installation."
 
-mv ainstall /mnt
-mv aconfig /mnt
+cp ainstall /mnt
+cp aconfig /mnt
 
 sleep 1s
 arch-chroot /mnt
