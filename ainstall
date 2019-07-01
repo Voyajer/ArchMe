@@ -48,6 +48,11 @@ pacstrap /mnt base base-devel
 echo "Generating fstab:"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
+echo "Review the fstab and add any partitons that you've created in addition to the root partition."
+lsblk -f
+read -p "Press enter to continue:"
+nano /mnt/etc/fstab
+
 clear
 
 echo "Chrooting into installation:"
