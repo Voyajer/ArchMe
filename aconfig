@@ -55,7 +55,7 @@ mkinitcpio -p linux
 grub-install --target=i386-pc --recheck /dev/sda
 echo -e "\n\nGRUB_DEFAULT=saved" >> /etc/default/grub
 echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub
-echo "GRUB_FORCE_HIDDEN_MENU="TRUE"
+echo "GRUB_FORCE_HIDDEN_MENU=TRUE"
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
