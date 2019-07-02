@@ -32,6 +32,7 @@ lsblk
 cd /
 ls
 
+dir='yes'
 while [$dir != no]
   do echo "Are there any additional directories to mount to its own partition? (If so type the directory name, if not write no.)"
      read dir
