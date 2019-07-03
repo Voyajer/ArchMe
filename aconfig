@@ -14,8 +14,9 @@ export LANG=en_US.UTF-8
 locale-gen
 locale -a
 
-echo "Setting timezone to US East."
-ls -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+echo "Select your timezone\:"
+tzselect | read timeZone
+ls -sf $timeZone /etc/localtime
 hwclock --systohc --utc
 
 echo "Configure repositories \(multilib support\):"
