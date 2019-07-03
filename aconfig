@@ -15,7 +15,7 @@ locale-gen
 locale -a
 
 echo "Setting timezone to US East."
-ls -s /usr/share/zoneinfo/America/New_York > /etc/localtime
+ls -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc --utc
 
 echo "Configure repositories \(multilib support\):"
