@@ -13,7 +13,7 @@ clear
 lsblk
 echo "Enter drive to partition \(ex: sda, sdb, or sdc\):"
 read drivePath
-echo "Now partitioning $drivePath\:"
+echo "Now partitioning $drivePath, remember to add a BIOS boot partition if using UEFI."
 echo "Press enter to run cfdisk:"
 cfdisk /dev/$drivePath
 
