@@ -11,7 +11,7 @@ clear
 
 #partitioning
 lsblk
-echo "Enter drive to partition (ex: sda, sdb, or sdc):"
+echo "Enter drive to partition \(ex: sda, sdb, or sdc\):"
 read drivePath
 echo "Now partitioning $drivePath\:"
 echo "Press enter to run cfdisk:"
@@ -19,9 +19,9 @@ cfdisk /dev/$drivePath
 
 clear
 
-echo "Which partition are you installing arch onto? (ex: sda1, sda3, or sdb2)"
+echo "Which partition are you installing arch onto? \(ex: sda1, sda3, or sdb2\)"
 read fullPath
-echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or xfs)"
+echo "Which filesystem should $fullPath be formatted as? \(ex: ext3, ext4, brtrfs, or xfs\)"
 read fSystem
 mkfs.$fSystem /dev/$fullPath
 
@@ -34,7 +34,7 @@ ls
 
 dir='yes'
 while [$dir != no]
-  do echo "Are there any additional directories to mount to its own partition? (If so type the directory name, if not write no.)"
+  do echo "Are there any additional directories to mount to its own partition? \(If so type the directory name, if not write no.\)"
      read dir
      echo "What partition should $dir be mounted to?"
      read partition
@@ -56,7 +56,7 @@ nano /mnt/etc/fstab
 
 clear
 
-echo "Chrooting into installation:"
+echo "Chrooting into installation\:"
 echo "Run aconfig inside the chroot environment to finish installation."
 
 cp ainstall /mnt
