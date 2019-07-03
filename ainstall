@@ -19,11 +19,30 @@ cfdisk /dev/$drivePath
 
 clear
 
+lsblk
 echo "Which partition are you installing arch onto? \(ex: sda1, sda3, or sdb2\)"
 read fullPath
 echo "Which filesystem should $fullPath be formatted as? \(ex: ext3, ext4, brtrfs, or xfs\)"
 read fSystem
 mkfs.$fSystem /dev/$fullPath
+while :
+do
+echo "Did you make a boot partition? \(yes, no\)"
+read bootYN
+bootYN=$(echo "$bootYN" | tr '[:upper:]' '[:lower:]')
+case $bootYN in
+      y/yes)
+        lsblk
+        echo "which partiton should be the boot partition?"
+        read bootPartition
+        mkfs.fat -F32 /dev/$bootPartition ;;
+      n/no)
+        break
+        ;;
+      *)
+        echo "Error\: Answer not valid"
+        esac
+done
 
 echo "Mounting $fullPath"
 mount /dev/$fullPath /mnt
