@@ -12,20 +12,20 @@ timedatectl set-ntp true
 #partition drives
 while :
 do
-lsblk
-echo "Enter drive to partition or 'done' to continue (ex: sda, sdb, or sdc):"
-read drivePath
-if [$drivePath -eq done]
-then
-      break
-else
-      echo "Now partitioning $drivePath, remember to add a boot partition if using UEFI."
-      echo "Press enter to run cfdisk:"
-      cfdisk /dev/$drivePath
+      lsblk
+      echo "Enter drive to partition or 'done' to continue (ex: sda, sdb, or sdc):"
+      read drivePath
+      if [$drivePath -eq done]
+      then
+            break
+      else
+            echo "Now partitioning $drivePath, remember to add a boot partition if using UEFI."
+            echo "Press enter to run cfdisk:"
+            cfdisk /dev/$drivePath
 
-      echo "Do any more drives need partitioning?"
+            echo "Do any more drives need partitioning?"
       
-fi
+      fi
 done
 
 clear
@@ -34,17 +34,17 @@ clear
 #format other partitions (root, home)
 while :
 do
-lsblk
-echo "Enter a partition to format or 'done' to continue (ex: sda1, sda3, or sdb2)"
-read fullPath
-if [$fullpath -eq done]
-then
-      break
-else
-      echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or xfs)"
-      read fSystem
-      mkfs.$fSystem /dev/$fullPath
-fi
+      lsblk
+      echo "Enter a partition to format or 'done' to continue (ex: sda1, sda3, or sdb2)"
+      read fullPath
+      if [$fullpath -eq done]
+      then
+            break
+      else
+            echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or xfs)"
+            read fSystem
+            mkfs.$fSystem /dev/$fullPath
+      fi
 done
 
 #Mount root partition
@@ -58,24 +58,24 @@ mount /dev/$root /mnt
 #format boot partition (done separately because mkfs pattern is not obvious for efi)
 while :
 do
-echo "Did you make a boot partition? (yes, no)"
-read bootYN
-#bootYN=$(echo "$bootYN" | tr '[:upper:]' '[:lower:]')
-if [$bootYN -eq no]
-then
-      break
-elif [$bootYN -eq yes]
-then
-      lsblk
-      echo "which partiton should be the boot partition?"
-      read bootPartition
-      mkfs.fat -F32 /dev/$bootPartition
-      mount /dev/$bootPartition /mnt/boot
-      echo "boot partition /dev/$bootPartition formatted and mounted at /mnt/boot"
-      break
-else
-      echo "Error: Answer not valid"
-fi
+      echo "Did you make a boot partition? (yes, no)"
+      read bootYN
+      #bootYN=$(echo "$bootYN" | tr '[:upper:]' '[:lower:]')
+      if [$bootYN -eq no]
+      then
+            break
+      elif [$bootYN -eq yes]
+      then
+            lsblk
+            echo "which partiton should be the boot partition?"
+            read bootPartition
+            mkfs.fat -F32 /dev/$bootPartition
+            mount /dev/$bootPartition /mnt/boot
+            echo "boot partition /dev/$bootPartition formatted and mounted at /mnt/boot"
+            break
+      else
+            echo "Error: Answer not valid"
+      fi
 done
 
 
@@ -86,18 +86,18 @@ cd /
 ls --color
 while :
 do 
-echo "Are there any additional directories to mount to its own partition? (If so type the directory name, if not write 'no'.)"
-read dir
-if [$dir -eq no]
-then
-      break
-else
-      lsblk
-      echo "What partition should $dir be mounted to?"
-      read partition
-      mount /dev/$partition /mnt/$dir
-      echo "/dev/$partition mounted as /mnt/$dir"
-fi
+      echo "Are there any additional directories to mount to its own partition? (If so type the directory name, if not write 'no'.)"
+      read dir
+      if [$dir -eq no]
+      then
+            break
+      else
+            lsblk
+            echo "What partition should $dir be mounted to?"
+            read partition
+            mount /dev/$partition /mnt/$dir
+            echo "/dev/$partition mounted as /mnt/$dir"
+      fi
 done
 
 clear
