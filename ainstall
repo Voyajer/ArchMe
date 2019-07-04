@@ -37,7 +37,7 @@ do
       lsblk
       echo "Enter a partition to format or 'done' to continue (ex: sda1, sda3, or sdb2)"
       read fullPath
-      if [ "$fullpath" == "done" ]
+      if [ "$fullPath" == "done" ]
       then
             break
       else
