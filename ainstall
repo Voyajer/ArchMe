@@ -70,6 +70,7 @@ do
             echo "which partiton should be the boot partition?"
             read bootPartition
             mkfs.fat -F32 /dev/$bootPartition
+            mkdir /mnt/boot
             mount /dev/$bootPartition /mnt/boot
             echo "boot partition /dev/$bootPartition formatted and mounted at /mnt/boot"
             break
@@ -95,6 +96,7 @@ do
             lsblk
             echo "What partition should $dir be mounted to?"
             read partition
+            mkdir /mnt/$dir
             mount /dev/$partition /mnt/$dir
             echo "/dev/$partition mounted as /mnt/$dir"
       fi
