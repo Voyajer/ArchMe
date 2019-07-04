@@ -7,86 +7,97 @@ ping archlinux.org -c 4
 loadkeys "us"
 timedatectl set-ntp true
 
-clear
 
-#partitioning
+
+#partition drives
 while :
 do
 lsblk
-echo "Enter drive to partition or \'done\' to continue \(ex: sda, sdb, or sdc\):"
+echo "Enter drive to partition or 'done' to continue (ex: sda, sdb, or sdc):"
 read drivePath
-case $drivepath in
-      done)
-       break
-       ;;
-      *)
-       echo "Now partitioning $drivePath, remember to add a BIOS boot partition if using UEFI."
-       echo "Press enter to run cfdisk:"
-       cfdisk /dev/$drivePath
-       echo "Do any more drives need partitioning?"
-       ;;
-done
-
-clear
-
-while :
-do
-echo "Did you make a boot partition? \(yes, no\)"
-read bootYN
-bootYN=$(echo "$bootYN" | tr '[:upper:]' '[:lower:]')
-case $bootYN in
-      y/yes)
-        lsblk
-        echo "which partiton should be the boot partition?"
-        read bootPartition
-        mkfs.fat -F32 /dev/$bootPartition
-        echo "boot partition formatted" ;;
-      n/no)
-        break
-        ;;
-      *)
-        echo "Error\: Answer not valid" ;;
-        esac
-done
-
-while :
-do
-lsblk
-echo "Enter another partition to format or \'done\' to continue \(ex: sda1, sda3, or sdb2\)"
-read fullPath
-if test "$fullpath" != "done"
+if [$drivePath -eq done]
 then
-echo "Which filesystem should $fullPath be formatted as? \(ex: ext3, ext4, brtrfs, or xfs\)"
-read fSystem
-mkfs.$fSystem /dev/$fullPath
+      break
 else
-break
+      echo "Now partitioning $drivePath, remember to add a boot partition if using UEFI."
+      echo "Press enter to run cfdisk:"
+      cfdisk /dev/$drivePath
+
+      echo "Do any more drives need partitioning?"
+      
 fi
 done
 
-echo "Mounting $fullPath"
-mount /dev/$fullPath /mnt
+clear
 
+
+#format other partitions (root, home)
+while :
+do
+lsblk
+echo "Enter a partition to format or 'done' to continue (ex: sda1, sda3, or sdb2)"
+read fullPath
+if [$fullpath -eq done]
+then
+      break
+else
+      echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or xfs)"
+      read fSystem
+      mkfs.$fSystem /dev/$fullPath
+fi
+done
+
+#Mount root partition
+lsblk
+
+echo "Which partition will be the root partition?"
+read root
+echo "Mounting /dev/$root as /mnt/"
+mount /dev/$root /mnt
+
+#format boot partition (done separately because mkfs pattern is not obvious for efi)
+while :
+do
+echo "Did you make a boot partition? (yes, no)"
+read bootYN
+#bootYN=$(echo "$bootYN" | tr '[:upper:]' '[:lower:]')
+if [$bootYN -eq no]
+then
+      break
+elif [$bootYN -eq yes]
+then
+      lsblk
+      echo "which partiton should be the boot partition?"
+      read bootPartition
+      mkfs.fat -F32 /dev/$bootPartition
+      mount /dev/$bootPartition /mnt/boot
+      echo "boot partition /dev/$bootPartition formatted and mounted at /mnt/boot"
+      break
+else
+      echo "Error: Answer not valid"
+fi
+done
+
+
+#mount other directories (home)
 lsblk
 
 cd /
 ls --color
-
 while :
 do 
-echo "Are there any additional directories to mount to its own partition? \(If so type the directory name, if not write \'no\'.\)"
+echo "Are there any additional directories to mount to its own partition? (If so type the directory name, if not write 'no'.)"
 read dir
-case $dir in
-      no)
+if [$dir -eq no]
+then
       break
-      ;;
-      *)
+else
       lsblk
       echo "What partition should $dir be mounted to?"
       read partition
-      mount /$dir /dev/$partition
-      ;;
-      esac
+      mount /dev/$partition /mnt/$dir
+      echo "/dev/$partition mounted as /mnt/$dir"
+fi
 done
 
 clear
