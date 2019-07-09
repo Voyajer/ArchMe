@@ -70,8 +70,8 @@ do
             echo "which partiton should be the boot partition?"
             read bootPartition
             mkfs.fat -F32 /dev/$bootPartition
-            mkdir /mnt/boot
-            mount /dev/$bootPartition /mnt/boot
+            mkdir -p /mnt/boot/efi
+            mount /dev/$bootPartition /mnt/boot/efi
             echo "boot partition /dev/$bootPartition formatted and mounted at /mnt/boot"
             break
       else
