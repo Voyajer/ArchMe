@@ -14,12 +14,12 @@ export LANG=en_US.UTF-8
 locale-gen
 locale -a
 
-echo "Select your timezone\:"
+echo "Select your timezone:"
 tzselect | read timeZone
 ln -sf $timeZone /etc/localtime
 hwclock --systohc --utc
 
-echo "Configure repositories \(multilib support\):"
+echo "Configure repositories (multilib support):"
 read -p "Press enter to continue:"
 nano /etc/pacman.conf
 pacman -Sy
@@ -29,6 +29,7 @@ clear
 echo What should the hostname be?
 read hostName
 echo "$hostName" >> /etc/hostname
+echo "127.0.1.1 localhost.localdomain $hostName" >> /etc/hosts
 
 clear
 
@@ -63,7 +64,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 clear
 
 #aur helper
-echo "Installing trizen\:"
+echo "Installing trizen:"
 echo EDITOR="/usr/bin/nano" >> /etc/environment
 
 cd /home/$userName
@@ -78,7 +79,7 @@ sudo -u $userName makepkg -csri --skippgpcheck
 clear
 
 #intel ucode
-echo "Install if using Intel processor\:"
+echo "Install if using Intel processor:"
 pacman -S intel-ucode
 
 clear
