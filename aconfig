@@ -54,12 +54,39 @@ os-prober
 ##reorder autodetect and block hooks for universal hardware booting
 sed -i 's/autodetect block/block autodetect/g' /etc/mkinitcpio.conf
 mkinitcpio -p linux
-grub-install --target=i386-pc --recheck /dev/sda
+
+UEFI="null"
+while :
+do
+      echo "Is this a UEFI system? (yes, no)"
+      read UEFI
+      if [ "$UEFI" == "yes" ]
+      then
+            pacman -S --noconfirm efibootmgr
+            #/boot/efi already made
+            grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
+            
+      elif [ "$UEFI" == "no" ]
+            echo "Where should grub be installed? (sda, sdb)"
+            read iGrub
+            grub-install --target=i386-pc --recheck /dev/$iGrub
+            break
+      fi
+done
+
 echo -e "\n\nGRUB_DEFAULT=saved" >> /etc/default/grub
 echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub
 echo "GRUB_FORCE_HIDDEN_MENU=TRUE" >> /etc/default/grub
 
 grub-mkconfig -o /boot/grub/grub.cfg
+
+if [ "$UEFI" == "yes" ]
+then
+      mkdir /boot/efi/EFI/BOOT
+      cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
+      echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi \"Arch GRUB bootloader\"" >> /boot/efi/startup.nsh
+      echo "exit" >> /boot/efi/startup.nsh
+fi
 
 clear
 
