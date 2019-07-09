@@ -16,7 +16,7 @@ locale -a
 
 echo "Select your timezone\:"
 tzselect | read timeZone
-ls -sf $timeZone /etc/localtime
+ln -sf $timeZone /etc/localtime
 hwclock --systohc --utc
 
 echo "Configure repositories \(multilib support\):"
