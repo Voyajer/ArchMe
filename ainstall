@@ -120,8 +120,8 @@ clear
 echo "Chrooting into installation\:"
 echo "Run aconfig inside the chroot environment to finish installation."
 
-cp ainstall /mnt
-cp aconfig /mnt
+mv ainstall /mnt
+mv aconfig /mnt
 
 sleep 1s
 arch-chroot /mnt
