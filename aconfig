@@ -33,7 +33,7 @@ echo "127.0.1.1 localhost.localdomain $hostName" >> /etc/hosts
 
 clear
 
-echo "Create password for root\:"
+echo "Create password for root:"
 passwd
 
 clear
@@ -65,8 +65,9 @@ do
             pacman -S --noconfirm efibootmgr
             #/boot/efi already made
             grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
-            
+            break
       elif [ "$UEFI" == "no" ]
+      then
             echo "Where should grub be installed? (sda, sdb)"
             read iGrub
             grub-install --target=i386-pc --recheck /dev/$iGrub
@@ -84,8 +85,7 @@ if [ "$UEFI" == "yes" ]
 then
       mkdir /boot/efi/EFI/BOOT
       cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
-      echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi \"Arch GRUB bootloader\"" >> /boot/efi/startup.nsh
-      echo "exit" >> /boot/efi/startup.nsh
+      echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi \"Arch GRUB bootloader\"\nexit" >> /boot/efi/startup.nsh
 fi
 
 clear
@@ -111,7 +111,7 @@ pacman -S intel-ucode
 
 clear
 
-echo "Which desktop environment would you like to use? \(plasma, gnome3, xfce, or none\)"
+echo "Which desktop environment would you like to use? (plasma, gnome3, xfce, or none)"
 read deWM
 case $deWM in
       plasma)
@@ -125,7 +125,7 @@ case $deWM in
            systemctl enable sddm.service ;;
       none)
            ;;
-           esac
+esac
 
 pacman -S --noconfirm networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g
 
@@ -136,6 +136,6 @@ rm -rf /ainstall /aconfig /home/$userName/trizen*
 
 clear
 
-echo "Install Nvidia GPU drivers with package nvidia \(400+\), nvidia-340xx \(8000-300\), or nvidia-304xx \(6000-7000\)"
-echo "You\'ll also probably want nvidia-settings and lib32-nvidia-utils for configuration and games."
+echo "Install Nvidia GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
+echo "You'll also probably want nvidia-settings and lib32-nvidia-utils for configuration and games."
 echo "You may need to modprobe your wifi driver to get it running at first."
