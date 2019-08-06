@@ -127,7 +127,7 @@ case $deWM in
            ;;
 esac
 
-pacman -S --noconfirm networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g
+pacman -S --noconfirm linux-headers networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g
 
 systemctl enable NetworkManager
 systemctl enable wpa_supplicant
