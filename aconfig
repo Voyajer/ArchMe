@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacman -S --noconfirm grub os-prober nano
+pacman -Syu --noconfirm grub os-prober nano initramfs
 
 #locale setup
 echo "Select locale:"
@@ -22,7 +22,7 @@ hwclock --systohc --utc
 echo "Configure repositories (multilib support):"
 read -p "Press enter to continue:"
 nano /etc/pacman.conf
-pacman -Sy
+pacman -Syu --noconfirm
 
 clear
 
@@ -127,7 +127,7 @@ case $deWM in
            ;;
 esac
 
-pacman -S --noconfirm linux-headers networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g
+pacman -Syu --noconfirm linux-headers networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g
 
 
 
