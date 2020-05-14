@@ -21,6 +21,8 @@ hwclock --systohc --utc
 
 echo "Configure repositories (multilib support):"
 read -p "Press enter to continue:"
+sed -i 's/#[multilib]/[multilib]/g' /etc/pacman.conf
+sed -i 's/#Include/Include/g' /etc/pacman.conf
 nano /etc/pacman.conf
 pacman -Syu --noconfirm
 
