@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacman -S --noconfirm grub os-prober
+pacman -S --noconfirm grub os-prober nano
 
 #locale setup
 echo "Select locale:"
