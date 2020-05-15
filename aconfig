@@ -123,7 +123,8 @@ read deWM
 case $deWM in
       plasma)
            pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark qbittorrent
-           systemctl enable sddm.service ;;
+           systemctl enable sddm.service 
+           sed -i '/[Compositing]/a MakFps=144.0' /home/%userName/.config/kwinrc;;
       gnome3)
            pacman -S --noconfirm gnome gparted gedit file-roller deluge
            systemctl enable gdm.service ;;
