@@ -20,8 +20,7 @@ ln -sf $timeZone /etc/localtime
 hwclock --systohc --utc
 
 #multilib
-sed -i 's/#[multilib]/[multilib]/g' /etc/pacman.conf
-sed -i 's/#Include/Include/g' /etc/pacman.conf
+sed -i '92,93s/#//g' /etc/pacman.conf
 pacman -Sy
 
 clear
