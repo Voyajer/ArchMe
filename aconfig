@@ -54,7 +54,7 @@ echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
 #bootloader-gen
 os-prober
 ##reorder autodetect and block hooks for universal hardware booting
-sed -i 's/autodetect block/block autodetect/g' /etc/mkinitcpio.conf
+sed -i 's/autodetect modconf block/block autodetect modconf/g' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 UEFI="null"
