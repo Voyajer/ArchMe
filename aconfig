@@ -4,6 +4,10 @@ pacman -Sy --noconfirm grub os-prober nano initramfs linux reflector
 
 #reflector
 reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+
+#makepkg config
+sed -i 's/-march=x86-64 -mtune=generic/-march=native -mtune=native/g' /etc/makepkg.conf
+
 #locale setup
 echo "Select locale:"
 read -p "Press enter to continue:"
