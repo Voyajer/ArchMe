@@ -1,7 +1,9 @@
 #!/bin/bash
 
-pacman -Sy --noconfirm grub os-prober nano initramfs linux
+pacman -Sy --noconfirm grub os-prober nano initramfs linux reflector
 
+#reflector
+reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 #locale setup
 echo "Select locale:"
 read -p "Press enter to continue:"
