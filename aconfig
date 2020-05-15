@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacman -Syu --noconfirm grub os-prober nano initramfs
+pacman -Sy --noconfirm grub os-prober nano initramfs linux
 
 #locale setup
 echo "Select locale:"
@@ -19,12 +19,10 @@ tzselect | read timeZone
 ln -sf $timeZone /etc/localtime
 hwclock --systohc --utc
 
-echo "Configure repositories (multilib support):"
-read -p "Press enter to continue:"
+#multilib
 sed -i 's/#[multilib]/[multilib]/g' /etc/pacman.conf
 sed -i 's/#Include/Include/g' /etc/pacman.conf
-nano /etc/pacman.conf
-pacman -Syu --noconfirm
+pacman -Sy
 
 clear
 
