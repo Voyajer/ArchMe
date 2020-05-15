@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacman -Sy --noconfirm grub os-prober nano initramfs linux reflector
+pacman -Sy --noconfirm grub os-prober nano initramfs linux linux-headers reflector
 
 #reflector
 reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
@@ -135,7 +135,7 @@ case $deWM in
            ;;
 esac
 
-pacman -Syu --noconfirm linux-headers networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g
+pacman -Syu --noconfirm networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g
 
 
 
