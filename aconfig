@@ -94,6 +94,8 @@ clear
 echo "Installing trizen:"
 echo EDITOR="/usr/bin/nano" >> /etc/environment
 
+chown -hR $userName /home/$userName
+
 cd /home/$userName
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/trizen.tar.gz
 tar -xvzf trizen.tar.gz
