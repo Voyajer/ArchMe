@@ -122,10 +122,10 @@ echo "Which desktop environment would you like to use? (plasma, gnome3, xfce, or
 read deWM
 case $deWM in
       plasma)
-           pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark qbittorrent
+           pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark knotes
            systemctl enable sddm.service ;;
       gnome3)
-           pacman -S --noconfirm gnome gparted gedit file-roller deluge
+           pacman -S --noconfirm gnome gparted gedit file-roller
            systemctl enable gdm.service ;;
       xfce)
            pacman -S --noconfirm xfce4 xfce4-goodies gparted file-roller deluge sddm network-manager-applet gvfs pavucontrol
@@ -134,7 +134,7 @@ case $deWM in
            ;;
 esac
 
-pacman -Syu --noconfirm networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g
+pacman -Syu --noconfirm networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code
 
 
 
