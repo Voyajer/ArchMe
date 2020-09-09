@@ -102,9 +102,9 @@ echo EDITOR="/usr/bin/nano" >> /etc/environment
 chown -hR $userName /home/$userName
 
 cd /home/$userName
-curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/trizen.tar.gz
-tar -xvzf trizen.tar.gz
-cd /home/$userName/trizen
+curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
+tar -xvzf yay.tar.gz
+cd /home/$userName/yay
 
 chown -hR $userName /home/$userName
 
@@ -143,7 +143,7 @@ systemctl enable NetworkManager
 systemctl enable wpa_supplicant
 systemctl enable bluetooth.service
 
-rm -rf /ainstall /aconfig /home/$userName/trizen*
+rm -rf /ainstall /aconfig /home/$userName/yay*
 
 clear
 
