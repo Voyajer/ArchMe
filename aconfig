@@ -96,7 +96,7 @@ fi
 clear
 
 #aur helper
-echo "Installing trizen:"
+echo "Installing yay:"
 echo EDITOR="/usr/bin/nano" >> /etc/environment
 
 chown -hR $userName /home/$userName
