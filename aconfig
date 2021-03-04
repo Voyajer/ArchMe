@@ -31,7 +31,25 @@ pacman -Sy
 
 clear
 
-echo What should the hostname be?
+#swap file
+echo "Would you like a swap file? (yes, no)"
+read swapAnswer
+if[ "$swapAnswer" == "yes" ]
+then
+      echo "What size swap file would you like in MiB?"
+      read swapSize
+      dd if=/dev/zero of=/swapfile bs=1M count=$swapSize status=progress
+      chmod 600 /swapfile
+      mkswap /swapfile
+      swapon /swapfile
+      echo "# /swapfile" >> /etc/fstab
+      echo "/swapfile none swap defaults,lazytime 0 0" >> /etc/fstab
+      
+else
+      break
+
+#User setup
+echo "What should the hostname be?"
 read hostName
 echo "$hostName" >> /etc/hostname
 echo "127.0.1.1 localhost.localdomain $hostName" >> /etc/hosts
