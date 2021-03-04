@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacman -Sy --noconfirm grub os-prober nano initramfs linux linux-headers reflector
+pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-headers reflector
 
 #reflector
 reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
