@@ -110,6 +110,9 @@ pacstrap /mnt base base-devel
 echo "Generating fstab:"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
+#add lazytime to all entries
+sed -i 's/rw,relatime/rw,relatime,lazytime/g' /etc/makepkg.conf
+
 echo "Review the fstab and add any partitons that you've created in addition to the root partition."
 lsblk -f
 read -p "Press enter to continue:"
