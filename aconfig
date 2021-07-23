@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#enable parallel downloads and color in pacman
+sed -i 's/#ParallelDownloads/ParallelDownloads/g' /etc/pacman.conf
+
+sed -i 's/#Color/color/g' /etc/pacman.conf
+
+#multilib
+sed -i '92,93s/#//g' /etc/pacman.conf
+
 pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-headers reflector
 
 #reflector
@@ -24,10 +32,6 @@ echo "Select your timezone:"
 tzselect | read timeZone
 ln -sf $timeZone /etc/localtime
 hwclock --systohc --utc
-
-#multilib
-sed -i '92,93s/#//g' /etc/pacman.conf
-pacman -Sy
 
 clear
 
