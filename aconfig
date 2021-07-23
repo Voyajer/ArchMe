@@ -8,13 +8,14 @@ sed -i 's/#Color/color/g' /etc/pacman.conf
 #multilib
 sed -i '92,93s/#//g' /etc/pacman.conf
 
-pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-headers reflector
-
 #reflector
 reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 #makepkg config
 sed -i 's/-march=x86-64 -mtune=generic/-march=native -mtune=native/g' /etc/makepkg.conf
+
+#Install kernel + key packages
+pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-headers reflector
 
 #locale setup
 echo "Select locale:"
