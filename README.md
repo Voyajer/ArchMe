@@ -1,4 +1,4 @@
-# ainstall
+# ArchMe
 Personal arch install script.
 
 Pull this from the arch iso live environment with:
