@@ -1,5 +1,5 @@
 # ArchMe
-Personal arch install script.
+This is my personal arch install script. It has only been tested on a limited set of my own hardware, if you have any issues let me know.
 
 Pull this from the arch iso live environment with:
 wget https://github.com/Voyajer/ArchMe/archive/master.zip
