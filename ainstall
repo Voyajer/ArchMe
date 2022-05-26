@@ -41,7 +41,7 @@ do
       then
             break
       else
-            echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or xfs)"
+            echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or fat)"
             read fSystem
             mkfs.$fSystem /dev/$fullPath
       fi
@@ -111,7 +111,7 @@ echo "Generating fstab:"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 #add lazytime to all entries
-sed -i 's/rw,relatime/rw,relatime,lazytime/g' /etc/makepkg.conf
+sed -i 's/rw,relatime/rw,relatime,lazytime/g' /etc/fstab
 
 echo "Review the fstab and add any partitons that you've created in addition to the root partition."
 lsblk -f
@@ -123,9 +123,9 @@ clear
 echo "Chrooting into installation\:"
 echo "Run aconfig inside the chroot environment to finish installation."
 
-cd /ainstall-master
-mv /ainstall-master/ainstall /mnt
-mv /ainstall-master/aconfig /mnt
+cd /ArchMe
+mv /ArchMe/ainstall /mnt
+mv /ArchMe/aconfig /mnt
 
 sleep 1s
 arch-chroot /mnt
