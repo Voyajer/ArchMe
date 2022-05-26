@@ -8,9 +8,21 @@ sed -i '38 a ILoveCandy' /etc/pacman.conf
 #multilib
 sed -i '92,93s/#//g' /etc/pacman.conf
 
-#makepkg config, set arch and tune to native, set number of jobs to number of threads
+#check if portable installation
+while :
+do 
+      echo "Is this a portable USB installation? (yes or no)"
+      read dir
+      if [ "$dir" == "yes" ]
+      then
+            break
+      else
+            sed -i 's/-march=x86-64 -mtune=generic/-march=native -mtune=native/g' /etc/makepkg.conf
+      fi
+done
+
+#makepkg config, set arch and tune to native if not portable, set number of jobs to number of threads
 processorCount=`nproc --all`
-sed -i 's/-march=x86-64 -mtune=generic/-march=native -mtune=native/g' /etc/makepkg.conf
 sed -i 's/#MAKEFLAGS=/MAKEFLAGS=/g' /etc/makepkg.conf
 sed -i "s/-j./-j$processorCount/g" /etc/makepkg.conf
 
@@ -72,7 +84,7 @@ clear
 
 echo "What should the user name be?"
 read userName
-useradd -m -g users -G wheel,storage,power -s /bin/bash $userName
+useradd -m -g users -G wheel,storage,power,tty -s /bin/bash $userName
 
 clear
 
