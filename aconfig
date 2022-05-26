@@ -55,7 +55,7 @@ clear
 #swap file
 echo "Would you like a swap file? (yes, no)"
 read swapAnswer
-if[ "$swapAnswer" == "yes" ]
+if [ "$swapAnswer" == "yes" ]
 then
       echo "What size swap file would you like in MiB?"
       read swapSize
