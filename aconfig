@@ -123,6 +123,25 @@ echo -e "\n\nGRUB_DEFAULT=saved" >> /etc/default/grub
 echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub
 echo "GRUB_FORCE_HIDDEN_MENU=TRUE" >> /etc/default/grub
 
+#microcode
+while :
+do
+      echo "Is this an Intel, AMD, or portable system?"
+      read PROC
+      if [ "$PROC" == "yes" ]
+      then
+            pacman -S --noconfirm intel-ucode
+            break
+      elif [ "$PROC" == "no" ]
+      then
+            pacman -S --noconfirm amd-ucode
+      fi
+      elif [ "$PROC" == "portable" ]
+      then
+            pacman -S --noconfirm amd-ucode intel-ucode
+      fi
+done
+
 grub-mkconfig -o /boot/grub/grub.cfg
 
 if [ "$UEFI" == "yes" ]
@@ -151,27 +170,7 @@ sudo -u $userName makepkg -csri --skippgpcheck
 
 clear
 
-#microcode
-while :
-do
-      echo "Is this an Intel, AMD, or portable system?"
-      read PROC
-      if [ "$PROC" == "yes" ]
-      then
-            pacman -S --noconfirm intel-ucode
-            break
-      elif [ "$PROC" == "no" ]
-      then
-            pacman -S --noconfirm amd-ucode
-      fi
-      elif [ "$PROC" == "portable" ]
-      then
-            pacman -S --noconfirm amd-ucode intel-ucode
-      fi
-done
-
-clear
-
+#desktop environment
 echo "Which desktop environment would you like to use? (plasma, gnome3, xfce, or none)"
 read deWM
 case $deWM in
