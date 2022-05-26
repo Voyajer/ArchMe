@@ -151,9 +151,24 @@ sudo -u $userName makepkg -csri --skippgpcheck
 
 clear
 
-#intel ucode
-echo "Install if using an Intel processor:"
-pacman -S intel-ucode
+#microcode
+while :
+do
+      echo "Is this an Intel, AMD, or portable system?"
+      read PROC
+      if [ "$PROC" == "yes" ]
+      then
+            pacman -S --noconfirm intel-ucode
+            break
+      elif [ "$PROC" == "no" ]
+      then
+            pacman -S --noconfirm amd-ucode
+      fi
+      elif [ "$PROC" == "portable" ]
+      then
+            pacman -S --noconfirm amd-ucode intel-ucode
+      fi
+done
 
 clear
 
