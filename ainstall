@@ -127,5 +127,7 @@ cd /ArchMe-master
 mv /ArchMe-master/ainstall /mnt
 mv /ArchMe-master/aconfig /mnt
 
+systemctl daemon-reload
+
 sleep 1s
 arch-chroot /mnt
