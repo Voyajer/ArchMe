@@ -191,9 +191,10 @@ esac
 pacman -Syu --noconfirm networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
 
 clear
-#anbox may need some fuckery to get yay to cooperate due to not being $userName
-echo "Install if you wish to have android app support"
-yay -Syu anbox-git anbox-image-gapps-rooted
+
+#anbox may need some fuckery to get yay to cooperate due to not being $userName ~~~~~maybe replace this with waydroid stuff once wayland works for everything
+#echo "Install if you wish to have android app support"
+#yay -Syu anbox-git anbox-image-gapps-rooted
 
 
 sysctl -w net.ipv4.ip_default_ttl=128
@@ -201,14 +202,14 @@ systemctl enable NetworkManager
 systemctl enable wpa_supplicant
 systemctl enable bluetooth.service
 
-systemctl daemon-reload
 systemctl enable linux-modules-cleanup
+systemctl daemon-reload
 
 rm -rf /ainstall /aconfig /home/$userName/yay*
 
 clear
 
-echo "Install Nvidia GPU drivers with package nvidia (400+), nvidia-340xx (8000-300), or nvidia-304xx (6000-7000)"
+echo "Install Nvidia GPU drivers with package nvidia, nvidia-open, nvidia-340xx, or nvidia-304xx"
 echo "You'll also probably want nvidia-settings and lib32-nvidia-utils for configuration and games."
 echo "You may need to modprobe your wifi driver to get it running at first."
 echo "Reboot when ready."
