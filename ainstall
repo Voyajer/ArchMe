@@ -111,7 +111,7 @@ echo "Generating fstab:"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 #add lazytime to all entries
-sed -i 's/rw,relatime/rw,relatime,lazytime/g' /etc/fstab
+sed -i 's/rw,relatime/rw,relatime,lazytime/g' /mnt/etc/fstab
 
 echo "Review the fstab and add any partitons that you've created in addition to the root partition."
 lsblk -f
