@@ -123,9 +123,9 @@ clear
 echo "Chrooting into installation\:"
 echo "Run aconfig inside the chroot environment to finish installation."
 
-cd /ArchMe
-mv /ArchMe/ainstall /mnt
-mv /ArchMe/aconfig /mnt
+cd /ArchMe-master
+mv /ArchMe-master/ainstall /mnt
+mv /ArchMe-master/aconfig /mnt
 
 sleep 1s
 arch-chroot /mnt
