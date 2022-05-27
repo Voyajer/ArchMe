@@ -19,7 +19,7 @@ do
       then
             break
       else
-            echo "Now partitioning $drivePath, remember to add a boot partition if using UEFI."
+            echo "Now partitioning $drivePath, Remember to add a boot partition if using UEFI. (And a 1MB legacy boot partition after if making a portable install.)"
             echo "Press enter to run cfdisk:"
             cfdisk /dev/$drivePath
 
@@ -58,7 +58,7 @@ mount /dev/$root /mnt
 #format boot partition (done separately because mkfs pattern is not obvious for efi)
 while :
 do
-      echo "Did you make a boot partition? (yes, no)"
+      echo "Did you make a boot partition? (yes, no, portable)"
       read bootYN
       #bootYN=$(echo "$bootYN" | tr '[:upper:]' '[:lower:]')
       if [ "$bootYN" == "no" ]
@@ -67,7 +67,7 @@ do
       elif [ "$bootYN" == "yes" ]
       then
             lsblk
-            echo "which partiton should be the boot partition?"
+            echo "which partiton should be the UEFI boot partition?"
             read bootPartition
             mkfs.fat -F32 /dev/$bootPartition
             mkdir -p /mnt/boot/efi
