@@ -105,17 +105,28 @@ mkinitcpio -p linux
 UEFI="null"
 while :
 do
-      echo "Is this a UEFI system? (yes, no)"
+      echo "Is this a UEFI system? (yes, no, both)"
       read UEFI
       if [ "$UEFI" == "yes" ]
       then
             pacman -S --noconfirm efibootmgr
             #/boot/efi already made
-            grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
+            grub-install --removable --target=x86_64-efi --bootloader-id=ArchLinux --efi-directory=/boot/efi
             break
       elif [ "$UEFI" == "no" ]
       then
             echo "Where should grub be installed? (sda, sdb)"
+            read iGrub
+            grub-install --target=i386-pc --recheck /dev/$iGrub
+            break
+      fi
+      elif [ "$UEFI" == "both" ]
+      then
+            pacman -S --noconfirm efibootmgr
+            #/boot/efi already made
+            grub-install --removable --target=x86_64-efi --bootloader-id=ArchLinux --efi-directory=/boot/efi
+            
+            echo "Where should the grub be installed? (sda, sdb)"
             read iGrub
             grub-install --target=i386-pc --recheck /dev/$iGrub
             break
