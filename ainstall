@@ -58,7 +58,7 @@ mount /dev/$root /mnt
 #format boot partition (done separately because mkfs pattern is not obvious for efi)
 while :
 do
-      echo "Did you make a boot partition? (yes, no, portable)"
+      echo "Did you make a boot partition? (yes, no)"
       read bootYN
       #bootYN=$(echo "$bootYN" | tr '[:upper:]' '[:lower:]')
       if [ "$bootYN" == "no" ]
