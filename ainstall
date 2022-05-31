@@ -13,7 +13,7 @@ timedatectl set-ntp true
 while :
 do
       lsblk
-      echo "Enter drive to partition or 'done' to continue (ex: sda, sdb, nvme0n1, mmcblk0):"
+      echo "Enter drive to partition or 'done' to continue (ex: sda, sdb, nvme0n1, mmcblk0):/nDouble check your partition table type by running cfdisk -z on your drive before running this script."
       read drivePath
       if [ "$drivePath" == "done" ]
       then
