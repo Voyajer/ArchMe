@@ -138,16 +138,18 @@ while :
 do
       echo "Is this an Intel, AMD, or portable system?"
       read PROC
-      if [ "$PROC" == "yes" ]
+      if [ "$PROC" == "intel" ]
       then
             pacman -S --noconfirm intel-ucode
             break
-      elif [ "$PROC" == "no" ]
+      elif [ "$PROC" == "amd" ]
       then
             pacman -S --noconfirm amd-ucode
+            break
       elif [ "$PROC" == "portable" ]
       then
             pacman -S --noconfirm amd-ucode intel-ucode
+            break
       fi
 done
 
