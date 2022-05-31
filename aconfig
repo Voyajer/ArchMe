@@ -67,9 +67,6 @@ then
       swapon /swapfile
       echo "# /swapfile" >> /etc/fstab
       echo "/swapfile none swap defaults,lazytime 0 0" >> /etc/fstab
-
-else
-      break
 fi
 
 #User setup
