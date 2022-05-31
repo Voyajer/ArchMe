@@ -145,11 +145,9 @@ do
       then
             pacman -S --noconfirm intel-ucode
             break
-      fi
       elif [ "$PROC" == "no" ]
       then
             pacman -S --noconfirm amd-ucode
-      fi
       elif [ "$PROC" == "portable" ]
       then
             pacman -S --noconfirm amd-ucode intel-ucode
