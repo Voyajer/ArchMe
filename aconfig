@@ -13,8 +13,8 @@ sed -i '38 a ILoveCandy' /etc/pacman.conf
 while :
 do 
       echo "Is this a portable USB installation? (yes or no)"
-      read dir
-      if [ "$dir" == "yes" ]
+      read portable
+      if [ "$portable" == "yes" ]
       then
             break
       else
