@@ -119,7 +119,6 @@ do
             read iGrub
             grub-install --target=i386-pc --recheck /dev/$iGrub
             break
-      fi
       elif [ "$UEFI" == "both" ]
       then
             pacman -S --noconfirm efibootmgr
