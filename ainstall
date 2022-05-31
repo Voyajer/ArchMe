@@ -104,7 +104,7 @@ done
 
 clear
 
-echo "Installing base and base-devel"
+echo "Installing base and base-devel \n"
 pacstrap /mnt base base-devel
 
 echo "Generating fstab:"
