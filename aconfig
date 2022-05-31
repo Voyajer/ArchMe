@@ -2,7 +2,7 @@
 
 #enable parallel downloads and color in pacman
 sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
-sed -i 's/#Color/color/g' /etc/pacman.conf
+sed -i 's/#Color/Color/g' /etc/pacman.conf
 
 #multilib
 sed -i '93,94s/#//g' /etc/pacman.conf
