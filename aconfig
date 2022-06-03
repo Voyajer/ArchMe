@@ -200,7 +200,7 @@ case $deWM in
 esac
 
 #default packages
-pacman -Syu --noconfirm networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
+pacman -Syu --noconfirm linux-firmware networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
 
 clear
 
