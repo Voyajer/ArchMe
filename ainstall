@@ -127,8 +127,8 @@ cd /
 
 sleep 1s
 
-mv /ArchMe-master/ainstall /mnt
-mv /ArchMe-master/aconfig /mnt
+cp /ArchMe-master/ainstall /mnt
+cp /ArchMe-master/aconfig /mnt
 
 systemctl daemon-reload
 
