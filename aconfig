@@ -182,27 +182,27 @@ sudo -u $userName makepkg -csri --skippgpcheck
 
 clear
 
+#default packages
+pacman -Syu --noconfirm linux-firmware networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pipewire lib32-pipewire wireplumber pipewire-alsa pipewire-pulse p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
+
+clear
+
 #desktop environment
 echo "Which desktop environment would you like to use? (plasma, gnome3, xfce, or none)"
 read deWM
 case $deWM in
       plasma)
-           pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark knotes
+           pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark knotes qpwgraph
            systemctl enable sddm.service ;;
       gnome3)
-           pacman -S --noconfirm gnome gparted gedit file-roller
+           pacman -S --noconfirm gnome gparted gedit file-roller helvum
            systemctl enable gdm.service ;;
       xfce)
-           pacman -S --noconfirm xfce4 xfce4-goodies gparted file-roller deluge sddm network-manager-applet gvfs pavucontrol
+           pacman -S --noconfirm xfce4 xfce4-goodies gparted file-roller deluge sddm network-manager-applet gvfs helvum
            systemctl enable sddm.service ;;
       none)
            ;;
 esac
-
-#default packages
-pacman -Syu --noconfirm linux-firmware networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
-
-clear
 
 #anbox may need some fuckery to get yay to cooperate due to not being $userName ~~~~~maybe replace this with waydroid stuff once wayland works for everything
 #echo "Install if you wish to have android app support"
@@ -210,11 +210,13 @@ clear
 
 
 sysctl -w net.ipv4.ip_default_ttl=128
+
 systemctl enable NetworkManager
 systemctl enable wpa_supplicant
 systemctl enable bluetooth.service
 
 systemctl enable linux-modules-cleanup
+
 systemctl daemon-reload
 
 rm -rf /ainstall /aconfig /home/$userName/yay*
