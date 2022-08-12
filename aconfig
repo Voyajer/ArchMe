@@ -93,6 +93,10 @@ echo "Create password for $userName:"
 passwd $userName
 #Allow all users in wheel group to use sudo if they know the password
 echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
+#Set sudo timeout to 60 minutes
+echo "Defaults timestamp_timeout=60" >> /etc/sudoers
+#Remove prompt timeout for sudo
+echo "Defaults passwd_timeout=0" >> /etc/sudoers
 
 #bootloader-gen
 os-prober
