@@ -91,8 +91,8 @@ clear
 
 echo "Create password for $userName:"
 passwd $userName
-#Allow all users to use sudo if they know the password
-echo "ALL ALL=(ALL) ALL" >> /etc/sudoers
+#Allow all users in wheel group to use sudo if they know the password
+echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
 #bootloader-gen
 os-prober
