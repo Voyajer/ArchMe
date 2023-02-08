@@ -7,7 +7,7 @@ ping archlinux.org -c 4
 loadkeys "us"
 timedatectl set-ntp true
 
-
+pacman -Sy archlinux-keyring
 
 #partition drives
 while :
