@@ -30,6 +30,7 @@ sed -i "s/-j./-j$processorCount/g" /etc/makepkg.conf
 
 
 #Install kernel + key packages
+pacman -Sy --noconfirm archlinux-keyring
 pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-headers reflector kernel-modules-hook
 
 #reflector
