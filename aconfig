@@ -24,10 +24,12 @@ do
 done
 
 #makepkg config, set arch and tune to native if not portable, set number of jobs to number of threads
-processorCount=`nproc --all`
-sed -i 's/#MAKEFLAGS=/MAKEFLAGS=/g' /etc/makepkg.conf
-sed -i "s/-j./-j$processorCount/g" /etc/makepkg.conf
-
+if [ "$portable" == "yes" ]
+then
+      processorCount=`nproc --all`
+      sed -i 's/#MAKEFLAGS=/MAKEFLAGS=/g' /etc/makepkg.conf
+      sed -i "s/-j./-j$processorCount/g" /etc/makepkg.conf
+fi
 
 #Install kernel + key packages
 pacman -Sy --noconfirm archlinux-keyring
