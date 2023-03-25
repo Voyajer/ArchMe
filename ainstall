@@ -105,7 +105,7 @@ done
 clear
 
 echo "Installing base and base-devel \n"
-pacstrap /mnt base base-devel
+pacstrap -K /mnt base base-devel linux linux-firmware
 
 echo "Generating fstab:"
 genfstab -U -p /mnt >> /mnt/etc/fstab
