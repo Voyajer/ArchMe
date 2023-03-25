@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#check network
-ping archlinux.org -c 4
-
 #prelim setup
 loadkeys "us"
 timedatectl set-ntp true
 
 pacman -Sy archlinux-keyring
+
+#check network
+ping archlinux.org -c 4
 
 #partition drives
 while :
