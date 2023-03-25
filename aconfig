@@ -188,7 +188,7 @@ sudo -u $userName makepkg -csri --skippgpcheck
 clear
 
 #default packages
-pacman -Syu --noconfirm linux-firmware networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pipewire lib32-pipewire wireplumber pipewire-alsa pipewire-pulse p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
+pacman -Syu --noconfirm ntp linux-firmware networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pipewire lib32-pipewire wireplumber pipewire-alsa pipewire-pulse p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
 
 clear
 
@@ -209,9 +209,9 @@ case $deWM in
            ;;
 esac
 
-#anbox may need some fuckery to get yay to cooperate due to not being $userName ~~~~~maybe replace this with waydroid stuff once wayland works for everything
-#echo "Install if you wish to have android app support"
-#yay -Syu anbox-git anbox-image-gapps-rooted
+######anbox may need some fuckery to get yay to cooperate due to not being $userName ~~~~~maybe replace this with waydroid stuff once wayland works for everything
+######echo "Install if you wish to have android app support"
+######yay -Syu anbox-git anbox-image-gapps-rooted
 
 
 sysctl -w net.ipv4.ip_default_ttl=128
@@ -219,6 +219,7 @@ sysctl -w net.ipv4.ip_default_ttl=128
 systemctl enable NetworkManager
 systemctl enable wpa_supplicant
 systemctl enable bluetooth.service
+systemctl enable ntp.service
 
 systemctl enable linux-modules-cleanup
 
