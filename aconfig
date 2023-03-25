@@ -6,7 +6,6 @@ sed -i 's/#Color/Color/g' /etc/pacman.conf
 
 #multilib
 sed -i '93,94s/#//g' /etc/pacman.conf
-
 sed -i '38 a ILoveCandy' /etc/pacman.conf
 
 #check if portable installation
@@ -32,7 +31,7 @@ then
 fi
 
 #Install kernel + key packages
-pacman -Sy --noconfirm archlinux-keyring
+pacman -Syu --noconfirm archlinux-keyring
 pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-headers reflector kernel-modules-hook
 
 #reflector
@@ -43,11 +42,10 @@ echo "Select locale:"
 read -p "Press enter to continue:"
 
 #nano /etc/locale.gen
+locale-gen
 echo en_US.UTF-8 UTF-8 > /etc/locale.gen
-
 localectl set-locale LANG=en_US.UTF-8
 export LANG=en_US.UTF-8
-locale-gen
 locale -a
 
 echo "Select your timezone:"
