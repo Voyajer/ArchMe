@@ -3,11 +3,11 @@ pacman -Syu --noconfirm ntp
 systemctl enable ntp.service
 
 #enable parallel downloads and color in pacman
+sed -i '38 a ILoveCandy' /etc/pacman.conf
 sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
 sed -i 's/#Color/Color/g' /etc/pacman.conf
 
 #enable multilib repositories
-sed -i '38 a ILoveCandy' /etc/pacman.conf
 sed -i '94,95s/#//g' /etc/pacman.conf
 
 #check if portable installation
