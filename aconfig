@@ -37,7 +37,7 @@ pacman -Syu --noconfirm archlinux-keyring
 pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-headers reflector kernel-modules-hook
 
 #reflector
-reflector --verbose --ipv4 --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose --ipv4 --protocol https,http --score 50 --fastest 10 --save /etc/pacman.d/mirrorlist
 
 #locale setup
 echo "Select locale:"
