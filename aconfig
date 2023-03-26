@@ -6,7 +6,7 @@ systemctl enable ntp.service
 sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
 sed -i 's/#Color/Color/g' /etc/pacman.conf
 
-#multilib
+#enable multilib repositories
 sed -i '93,94s/#//g' /etc/pacman.conf
 sed -i '38 a ILoveCandy' /etc/pacman.conf
 
@@ -37,7 +37,7 @@ pacman -Syu --noconfirm archlinux-keyring
 pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-headers reflector kernel-modules-hook
 
 #reflector
-reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose --ipv4 --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 #locale setup
 echo "Select locale:"
