@@ -238,10 +238,11 @@ do
       then
             pacman -S --noconfirm mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau
             break
-      if [ "$gpu" == "nvidia" ]
+      elif [ "$gpu" == "nvidia" ]
       then
             echo "Install Nvidia GPU drivers with package nvidia, nvidia-open, nvidia-340xx, or nvidia-304xx"
             echo "You'll also probably want nvidia-settings and lib32-nvidia-utils for configuration and games."
+            break
       fi
 done
 
