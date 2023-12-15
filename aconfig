@@ -190,7 +190,7 @@ sudo -u $userName makepkg -csri --skippgpcheck
 clear
 
 #default packages
-pacman -Syu --noconfirm wayland xorg-xwayland linux-firmware networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pipewire lib32-pipewire wireplumber pipewire-alsa pipewire-pulse p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
+yay -Syu --noconfirm wayland xorg-xwayland linux-firmware networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pipewire jamesdsp-pipewire-bin lib32-pipewire wireplumber pipewire-alsa pipewire-pulse p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
 
 clear
 
