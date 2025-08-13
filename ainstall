@@ -41,7 +41,7 @@ do
       then
             break
       else
-            echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, brtrfs, or fat)"
+            echo "Which filesystem should $fullPath be formatted as? (ex: ext3, ext4, btrfs, or fat)"
             read fSystem
             mkfs.$fSystem /dev/$fullPath
       fi
