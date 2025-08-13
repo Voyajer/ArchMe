@@ -199,7 +199,7 @@ echo "Which desktop environment would you like to use? (plasma, gnome3, xfce, or
 read deWM
 case $deWM in
       plasma)
-           pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark knotes qpwgraph plasma-wayland-session
+           pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark knotes qpwgraph plasma-workspace
            systemctl enable sddm.service ;;
       gnome3)
            pacman -S --noconfirm gnome gparted gedit file-roller helvum
