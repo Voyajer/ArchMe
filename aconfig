@@ -1,6 +1,6 @@
 #!/bin/bash
 pacman -Syu --noconfirm ntp
-systemctl enable ntp.service
+systemctl enable ntpd.service
 
 #enable parallel downloads and color in pacman
 sed -i '38 a ILoveCandy' /etc/pacman.conf
