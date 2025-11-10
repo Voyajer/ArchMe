@@ -34,7 +34,7 @@ fi
 
 #Install kernel + key packages
 pacman -Syu --noconfirm archlinux-keyring
-pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-lts linux-lts-headers linux-headers reflector kernel-modules-hook
+pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-lts linux-lts-headers linux-headers reflector kernel-modules-hook git
 
 #reflector
 reflector --verbose --ipv4 --protocol https,http --score 50 --fastest 10 --save /etc/pacman.d/mirrorlist
@@ -179,8 +179,7 @@ echo EDITOR="/usr/bin/nano" >> /etc/environment
 chown -hR $userName /home/$userName
 
 cd /home/$userName
-curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
-tar -xvzf yay.tar.gz
+git clone https://aur.archlinux.org/yay.git
 cd /home/$userName/yay
 
 chown -hR $userName /home/$userName
