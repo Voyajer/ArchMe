@@ -186,10 +186,12 @@ chown -hR $userName /home/$userName
 
 sudo -u $userName makepkg -csri --skippgpcheck
 
+cd /home/$userName
+
 clear
 
 #default packages
-yay -Syu --noconfirm wayland xorg-xwayland linux-firmware networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pipewire jamesdsp-pipewire-bin lib32-pipewire wireplumber pipewire-alsa pipewire-pulse p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
+yay -Syu --noconfirm wayland xorg-xwayland linux-firmware networkmanager bash-completion wpa_supplicant xorg-xinit xf86-video-vesa xorg-apps xorg firefox alsa-utils pipewire lib32-pipewire wireplumber pipewire-alsa pipewire-pulse p7zip htop wine-staging winetricks libreoffice-fresh mpv adwaita-icon-theme links ntfs-3g deluge code noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra 
 
 clear
 
@@ -198,7 +200,7 @@ echo "Which desktop environment would you like to use? (plasma, gnome3, xfce, or
 read deWM
 case $deWM in
       plasma)
-           pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark knotes qpwgraph plasma-workspace
+           pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark qpwgraph plasma-workspace
            systemctl enable sddm.service ;;
       gnome3)
            pacman -S --noconfirm gnome gparted gedit file-roller helvum
@@ -210,13 +212,10 @@ case $deWM in
            ;;
 esac
 
-######anbox may need some fuckery to get yay to cooperate due to not being $userName ~~~~~maybe replace this with waydroid stuff once wayland works for everything
-######echo "Install if you wish to have android app support"
-######yay -Syu anbox-git anbox-image-gapps-rooted
-
 
 sysctl -w net.ipv4.ip_default_ttl=128
 
+#issues with these?
 systemctl enable NetworkManager
 systemctl enable wpa_supplicant
 systemctl enable bluetooth.service
@@ -225,7 +224,7 @@ systemctl enable linux-modules-cleanup
 
 systemctl daemon-reload
 
-rm -rf /ainstall /aconfig /home/$userName/yay*
+rm -rf /ArchMe-master /ainstall /aconfig /home/$userName/yay*
 
 clear
 
