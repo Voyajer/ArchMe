@@ -242,7 +242,7 @@ do
             break
       elif [ "$gpu" == "nvidia" ]
       then
-            echo "Install Nvidia GPU drivers with package nvidia, nvidia-open, nvidia-340xx, or nvidia-304xx"
+            echo "Install Nvidia GPU drivers with package nvidia-open, nvidia-580xx (9-10 series), nvidia-470xx (6-7 series), nvidia-340xx (8000-9000 series)"
             echo "You'll also probably want nvidia-settings and lib32-nvidia-utils for configuration and games."
             break
       fi
