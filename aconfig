@@ -34,6 +34,11 @@ fi
 
 #Install kernel + key packages
 pacman -Syu --noconfirm archlinux-keyring
+
+pacman-key --init
+pacman-key --populate archlinux
+pacman-key --refresh-keys
+
 pacman -Syu --noconfirm grub os-prober nano initramfs linux linux-lts linux-lts-headers linux-headers reflector kernel-modules-hook git
 
 #reflector
