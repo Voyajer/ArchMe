@@ -228,6 +228,18 @@ systemctl enable bluetooth.service
 systemctl --user enable --now arch-update.timer
 arch-update --tray --enable
 
+#ulimit increase
+echo "Setting permanent ulimits..."
+cat << 'EOF' >> /etc/security/limits.conf
+* soft nofile 524288
+* hard nofile 524288
+EOF
+
+#also in systemd
+sed -i '/\[Manager\]/a DefaultLimitNOFILE=524288' /etc/systemd/user.conf
+sed -i '/\[Manager\]/a DefaultLimitNOFILE=524288' /etc/systemd/system.conf
+
+
 
 systemctl enable linux-modules-cleanup
 
