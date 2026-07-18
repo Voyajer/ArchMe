@@ -1,6 +1,6 @@
 #!/bin/bash
 pacman -Syu --noconfirm ntp
-systemctl enable ntpd.service
+systemctl --now enable ntpd.service
 
 #enable parallel downloads and color in pacman
 sed -i '38 a ILoveCandy' /etc/pacman.conf
@@ -206,13 +206,13 @@ read deWM
 case $deWM in
       plasma)
            pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark qpwgraph plasma-workspace
-           systemctl enable sddm.service ;;
+           systemctl enable --now sddm.service ;;
       gnome3)
            pacman -S --noconfirm gnome gparted gedit file-roller helvum
-           systemctl enable gdm.service ;;
+           systemctl enable --now gdm.service ;;
       xfce)
            pacman -S --noconfirm xfce4 xfce4-goodies gparted file-roller deluge sddm network-manager-applet gvfs helvum
-           systemctl enable sddm.service ;;
+           systemctl enable --now sddm.service ;;
       none)
            ;;
 esac
@@ -221,9 +221,9 @@ esac
 sysctl -w net.ipv4.ip_default_ttl=128
 
 #issues with these?
-systemctl enable NetworkManager
-systemctl enable wpa_supplicant
-systemctl enable bluetooth.service
+systemctl enable --now NetworkManager
+systemctl enable --now wpa_supplicant
+systemctl enable --now bluetooth.service
 
 systemctl --user enable --now arch-update.timer
 arch-update --tray --enable
@@ -241,7 +241,7 @@ sed -i '/\[Manager\]/a DefaultLimitNOFILE=524288' /etc/systemd/system.conf
 
 
 
-systemctl enable linux-modules-cleanup
+systemctl enable --now linux-modules-cleanup
 
 systemctl daemon-reload
 
