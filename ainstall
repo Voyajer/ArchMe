@@ -126,9 +126,7 @@ echo "Run aconfig inside the chroot environment to finish installation."
 
 sleep 1s
 
-cd /ArchMe-master
-
-cp "$(pwd)/aconfig" /mnt/
+cp "/root/ArchMe-master/aconfig" /mnt/
 
 systemctl daemon-reload
 
