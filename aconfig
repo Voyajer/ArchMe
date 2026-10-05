@@ -251,7 +251,7 @@ systemctl enable linux-modules-cleanup
 
 systemctl daemon-reload
 
-rm -rf /ArchMe-master /ainstall /aconfig /home/$userName/yay*
+rm -rf /home/$userName/yay*
 
 clear
 
