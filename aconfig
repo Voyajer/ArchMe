@@ -17,20 +17,26 @@ do
       read portable
       if [ "$portable" == "yes" ]
       then
+            # Portable setup: Enable multi-threading only, keeping broad CPU architecture bounds
+            sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$(nproc)"/g' /etc/makepkg.conf
+            sed -i 's/COMPRESSZST=(zstd -c -z -q -)/COMPRESSZST=(zstd -c -z -q --threads=0 -)/g' /etc/makepkg.conf
             break
       else
-            sed -i 's/-march=x86-64 -mtune=generic/-march=native -mtune=native/g' /etc/makepkg.conf
+            sed -i 's/-march=x86-64/-march=native/g' /etc/makepkg.conf
+            sed -i 's/-mtune=generic/-mtune=native/g' /etc/makepkg.conf
+            sed -i 's/ -O2 / -O3 /g' /etc/makepkg.conf
+            sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$(nproc)"/g' /etc/makepkg.conf
+            sed -i 's/COMPRESSZST=(zstd -c -z -q -)/COMPRESSZST=(zstd -c -z -q --threads=0 -)/g' /etc/makepkg.conf
+            #RAM (tmpfs) builddir
+            sed -i 's|#BUILDDIR=/tmp/makepkg|BUILDDIR=/tmp/makepkg|g' /etc/makepkg.conf
+            #ccache asset storage processing
+            sed -i 's/!ccache/ccache/g' /etc/makepkg.conf
+            #mold parallel linker
+            sed -i '/^LDFLAGS=/c\LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now --ld-path=/usr/bin/mold"' /etc/makepkg.conf
+            echo -e "\n# Custom Main PC Options Overrides\nOPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)" >> /etc/makepkg.conf
             break
       fi
 done
-
-#makepkg config, set arch and tune to native if not portable, set number of jobs to number of threads
-if [ "$portable" == "yes" ]
-then
-      processorCount=`nproc --all`
-      sed -i 's/#MAKEFLAGS=/MAKEFLAGS=/g' /etc/makepkg.conf
-      sed -i "s/-j./-j$processorCount/g" /etc/makepkg.conf
-fi
 
 #Install kernel + key packages
 pacman -Syu --noconfirm archlinux-keyring
