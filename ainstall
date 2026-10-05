@@ -106,7 +106,7 @@ clear
 
 echo "Installing base and base-devel:"
 echo " "
-pacstrap -K /mnt base base-devel linux linux-firmware ccache mold
+pacstrap -K -P /mnt base base-devel linux linux-firmware ccache mold
 
 echo "Generating fstab:"
 genfstab -U -p /mnt >> /mnt/etc/fstab
