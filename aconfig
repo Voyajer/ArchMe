@@ -110,6 +110,11 @@ echo "Defaults passwd_timeout=0" >> /etc/sudoers
 os-prober
 ##reorder autodetect and block hooks for universal hardware booting
 sed -i 's/autodetect modconf block/block autodetect modconf/g' /etc/mkinitcpio.conf
+
+echo -e "\n\nGRUB_DEFAULT=saved" >> /etc/default/grub
+echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub
+echo "GRUB_FORCE_HIDDEN_MENU=TRUE" >> /etc/default/grub
+
 mkinitcpio -p linux
 
 UEFI="null"
@@ -142,10 +147,6 @@ do
       fi
 done
 
-echo -e "\n\nGRUB_DEFAULT=saved" >> /etc/default/grub
-echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub
-echo "GRUB_FORCE_HIDDEN_MENU=TRUE" >> /etc/default/grub
-
 #microcode
 while :
 do
@@ -171,8 +172,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 if [ "$UEFI" == "yes" ]
 then
       mkdir /boot/efi/EFI/BOOT
-      cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
-      echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi \"Arch GRUB bootloader\"\nexit" >> /boot/efi/startup.nsh
+      cp /boot/efi/EFI/ArchLinux/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
+      echo -e "bcf boot add 1 fs0:\\EFI\\ArchLinux\\grubx64.efi \"Arch GRUB bootloader\"\nexit" >> /boot/efi/startup.nsh
 fi
 
 clear
