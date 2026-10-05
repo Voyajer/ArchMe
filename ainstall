@@ -128,7 +128,7 @@ sleep 1s
 
 cd /ArchMe-master
 
-cp aconfig /mnt
+cp "$(pwd)/aconfig" /mnt/
 
 systemctl daemon-reload
 
