@@ -1,6 +1,7 @@
 #!/bin/bash
-pacman -Syu --noconfirm ntp
-systemctl --now enable ntpd.service
+pacman -Syyu --noconfirm ntp
+systemctl enable ntpd.service
+systemctl start ntpd.service
 
 #enable parallel downloads and color in pacman
 sed -i '38 a ILoveCandy' /etc/pacman.conf
@@ -8,7 +9,7 @@ sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
 sed -i 's/#Color/Color/g' /etc/pacman.conf
 
 #enable multilib repositories
-sed -i '93,94s/#//g' /etc/pacman.conf
+sed -i '/\[multilib\]/,/Include/s/^#//' /etc/pacman.conf
 
 #check if portable installation
 while :
@@ -213,13 +214,13 @@ read deWM
 case $deWM in
       plasma)
            pacman -S --noconfirm plasma-meta plasma-nm spectacle konsole gwenview dolphin partitionmanager kate ark qpwgraph plasma-workspace
-           systemctl enable --now sddm.service ;;
+           systemctl enable sddm.service ;;
       gnome3)
            pacman -S --noconfirm gnome gparted gedit file-roller helvum
-           systemctl enable --now gdm.service ;;
+           systemctl enable gdm.service ;;
       xfce)
            pacman -S --noconfirm xfce4 xfce4-goodies gparted file-roller deluge sddm network-manager-applet gvfs helvum
-           systemctl enable --now sddm.service ;;
+           systemctl enable sddm.service ;;
       none)
            ;;
 esac
@@ -228,11 +229,11 @@ esac
 sysctl -w net.ipv4.ip_default_ttl=128
 
 #issues with these?
-systemctl enable --now NetworkManager
-systemctl enable --now wpa_supplicant
-systemctl enable --now bluetooth.service
+systemctl enable NetworkManager
+systemctl enable wpa_supplicant
+systemctl enable bluetooth.service
 
-systemctl --user enable --now arch-update.timer
+systemctl --user enable arch-update.timer
 arch-update --tray --enable
 
 #ulimit increase
@@ -248,7 +249,8 @@ sed -i '/\[Manager\]/a DefaultLimitNOFILE=524288' /etc/systemd/system.conf
 
 
 
-systemctl enable --now linux-modules-cleanup
+systemctl enable linux-modules-cleanup
+systemctl start linux-modules-cleanup
 
 systemctl daemon-reload
 
