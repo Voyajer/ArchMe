@@ -13,7 +13,7 @@ ping archlinux.org -c 4
 while :
 do
       lsblk
-      echo "Enter drive to partition or 'done' to continue (ex: sda, sdb, nvme0n1, mmcblk0):/nDouble check your partition table type by running cfdisk -z on your drive before running this script."
+      echo "Enter drive to partition or 'done' to continue (ex: sda, sdb, nvme0n1, mmcblk0):/n Double check your partition table type by running cfdisk -z on your drive before running this script."
       read drivePath
       if [ "$drivePath" == "done" ]
       then
@@ -124,8 +124,6 @@ clear
 echo "Chrooting into installation\:"
 echo "Run aconfig inside the chroot environment to finish installation."
 
-cd /ainstall-master/
-
 sleep 1s
 
 cp ainstall /mnt
@@ -134,4 +132,7 @@ cp aconfig /mnt
 systemctl daemon-reload
 
 sleep 1s
+
+cd /
+
 arch-chroot /mnt
