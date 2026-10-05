@@ -1,7 +1,6 @@
 #!/bin/bash
 pacman -Syyu --noconfirm ntp
 systemctl enable ntpd.service
-systemctl start ntpd.service
 
 #enable parallel downloads and color in pacman
 sed -i '38 a ILoveCandy' /etc/pacman.conf
@@ -248,9 +247,7 @@ sed -i '/\[Manager\]/a DefaultLimitNOFILE=524288' /etc/systemd/user.conf
 sed -i '/\[Manager\]/a DefaultLimitNOFILE=524288' /etc/systemd/system.conf
 
 
-
 systemctl enable linux-modules-cleanup
-systemctl start linux-modules-cleanup
 
 systemctl daemon-reload
 
