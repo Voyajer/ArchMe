@@ -181,20 +181,26 @@ fi
 clear
 
 #aur helper
+
 echo "Installing yay:"
+
 echo EDITOR="/usr/bin/nano" >> /etc/environment
 
-chown -hR $userName /home/$userName
+chown -R $userName:users /home/$userName
 
 cd /home/$userName
+
 git clone https://aur.archlinux.org/yay.git
+
 cd /home/$userName/yay
 
-chown -hR $userName /home/$userName
+chown -R $userName:users /home/$userName/yay
 
-sudo -u $userName makepkg -csri --skippgpcheck
+sudo -u $userName makepkg -csr --skippgpcheck
 
 cd /home/$userName
+
+pacman -U --noconfirm /home/$userName/yay/yay-*.pkg.tar.zst
 
 clear
 
