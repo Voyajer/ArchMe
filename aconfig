@@ -27,8 +27,6 @@ do
             sed -i 's/ -O2 / -O3 /g' /etc/makepkg.conf
             sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$(nproc)"/g' /etc/makepkg.conf
             sed -i 's/COMPRESSZST=(zstd -c -z -q -)/COMPRESSZST=(zstd -c -z -q --threads=0 -)/g' /etc/makepkg.conf
-            #RAM (tmpfs) builddir
-            sed -i 's|#BUILDDIR=/tmp/makepkg|BUILDDIR=/tmp/makepkg|g' /etc/makepkg.conf
             #ccache asset storage processing
             sed -i 's/!ccache/ccache/g' /etc/makepkg.conf
             #mold parallel linker
