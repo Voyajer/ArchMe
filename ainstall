@@ -4,6 +4,40 @@
 loadkeys "us"
 timedatectl set-ntp true
 
+# System information
+clear
+echo "========================================"
+echo "        SYSTEM INFORMATION"
+echo "========================================"
+echo
+
+echo "Boot Mode:"
+if [ -f /sys/firmware/efi/fw_platform_size ]; then
+    EFI_BITS=$(cat /sys/firmware/efi/fw_platform_size)
+    echo "  UEFI ($EFI_BITS-bit)"
+else
+    echo "  Legacy BIOS / CSM"
+fi
+echo
+
+echo "CPU:"
+lscpu | grep -E 'Model name|CPU\(s\):|Thread|Core|Socket' | head -n 6
+echo
+
+echo "Memory:"
+free -h | grep '^Mem:'
+echo
+
+echo "Storage:"
+lsblk -o NAME,SIZE,TYPE,FSTYPE,FSAVAIL,FSUSE%,MOUNTPOINTS,MODEL
+echo
+
+echo "========================================"
+echo "  Use this to inform whether you need"
+echo "  bios/dos mode or UEFI/gpt mode."
+echo "========================================"
+read -p "Press Enter to continue..."
+
 pacman -Sy archlinux-keyring
 
 #check network
