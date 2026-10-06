@@ -26,11 +26,11 @@ do
             sed -i 's/-mtune=generic/-mtune=native/g' /etc/makepkg.conf
             sed -i 's/ -O2 / -O3 /g' /etc/makepkg.conf
             sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$(nproc)"/g' /etc/makepkg.conf
-            sed -i 's/COMPRESSZST=(zstd -c -z -q -)/COMPRESSZST=(zstd -c -z -q --threads=0 -)/g' /etc/makepkg.conf
+            sed -i '/^COMPRESSZST=/c\COMPRESSZST=(zstd -c -T0 -)' /etc/makepkg.conf
             #ccache asset storage processing
             sed -i 's/!ccache/ccache/g' /etc/makepkg.conf
             #mold parallel linker
-            sed -i '/^LDFLAGS=/c\LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now --ld-path=/usr/bin/mold"' /etc/makepkg.conf
+            sed -i '/^LDFLAGS=/,+1c\LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now --ld-path=/usr/bin/mold"' /etc/makepkg.conf
             echo -e "\n# Custom Main PC Options Overrides\nOPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)" >> /etc/makepkg.conf
             break
       fi
